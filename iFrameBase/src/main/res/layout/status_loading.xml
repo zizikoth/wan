@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:id="@+id/loading_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <ProgressBar
+            android:indeterminateTint="#3a9bff"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:targetApi="lollipop"/>
+
+    <TextView
+            android:text="加载中"
+            android:layout_gravity="center"
+            android:textSize="@dimen/sp18"
+            android:textColor="#666666"
+            android:gravity="center"
+            android:layout_marginTop="@dimen/dp15"
+            android:drawablePadding="@dimen/dp15"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+</LinearLayout>

@@ -1,0 +1,54 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+android {
+    compileSdkVersion rootProject.ext.root.compileSdkVersion
+    defaultConfig {
+        applicationId rootProject.ext.root.applicationId
+        minSdkVersion rootProject.ext.root.minSdkVersion
+        targetSdkVersion rootProject.ext.root.targetSdkVersion
+        versionCode rootProject.ext.root.versionCode
+        versionName rootProject.ext.root.versionName
+        testInstrumentationRunner rootProject.ext.test.testInstrumentationRunner
+        multiDexEnabled true
+    }
+
+    buildTypes {
+        debug {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        release {
+            minifyEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kapt {
+        arguments {
+            arg("AROUTER_MODULE_NAME", project.getName())
+        }
+    }
+
+}
+
+
+dependencies {
+    testImplementation rootProject.ext.testLib
+    androidTestImplementation rootProject.ext.androidTestLib
+    kapt rootProject.ext.kaptLib
+    if (!moduleCommonRunAlone.toBoolean()) implementation project(':moduleCommon')
+    if (!moduleHomeRunAlone.toBoolean()) implementation project(':moduleHome')
+    if (!moduleNavigationRunAlone.toBoolean()) implementation project(':moduleNavigation')
+    if (!moduleProjectRunAlone.toBoolean()) implementation project(':moduleProject')
+    if (!moduleMineRunAlone.toBoolean()) implementation project(':moduleMine')
+    implementation project(':iFrameBase')
+}

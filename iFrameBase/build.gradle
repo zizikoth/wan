@@ -1,0 +1,45 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+android {
+    compileSdkVersion rootProject.ext.root.compileSdkVersion
+    defaultConfig {
+        minSdkVersion rootProject.ext.root.minSdkVersion
+        targetSdkVersion rootProject.ext.root.targetSdkVersion
+        versionCode rootProject.ext.root.versionCode
+        versionName rootProject.ext.root.versionName
+        testInstrumentationRunner rootProject.ext.test.testInstrumentationRunner
+        multiDexEnabled true
+    }
+
+    lintOptions {
+        abortOnError false
+    }
+
+    androidExtensions {
+        experimental = true
+    }
+
+    kapt {
+        arguments {
+            arg("AROUTER_MODULE_NAME", project.getName())
+        }
+    }
+}
+
+dependencies {
+    testImplementation rootProject.ext.testLib
+    androidTestImplementation rootProject.ext.androidTestLib
+
+    api rootProject.ext.supportLib
+    api rootProject.ext.widgetLib
+    api rootProject.ext.utilsLib
+
+    kapt rootProject.ext.kaptLib
+
+    releaseApi rootProject.ext.releaseLib
+    debugApi rootProject.ext.debugLib
+
+}

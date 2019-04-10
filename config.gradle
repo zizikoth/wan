@@ -1,0 +1,96 @@
+ext {
+    root = [
+            compileSdkVersion        : 28,
+            minSdkVersion            : 19,
+            targetSdkVersion         : 28,
+            versionCode              : 1000,
+            versionName              : "1.0.0",
+            applicationId            : "zhou.memo.iframe",
+            testInstrumentationRunner: "android.support.test.runner.AndroidJUnitRunner"
+    ]
+
+    sdkVersion = [
+            suppertVersion   : "28.0.0",
+            retrofit2Version : "2.4.0",
+            okhttpVersion    : "3.11.0",
+            leakCanaryVersion: "1.6.2",
+            glideVersion     : "4.8.0",
+            kotlinVersion    : "1.3.20"
+    ]
+
+    test = [
+            junit: "junit:junit:4.12"
+    ]
+
+    androidTest = [
+            testRunner  : "com.android.support.test:runner:1.0.2",
+            testEspresso: "com.android.support.test.espresso:espresso-core:3.0.2"
+    ]
+
+    support = [
+            supportv4  : "com.android.support:support-v4:$sdkVersion.suppertVersion",
+            appcompatv7: "com.android.support:appcompat-v7:$sdkVersion.suppertVersion",
+            annotations: "com.android.support:support-annotations:$sdkVersion.suppertVersion",
+            design     : "com.android.support:design:$sdkVersion.suppertVersion"
+    ]
+
+    utils = [
+            kotlin            : "org.jetbrains.kotlin:kotlin-stdlib:$sdkVersion.kotlinVersion",
+            okhttp            : "com.squareup.okhttp3:okhttp:$sdkVersion.okhttpVersion",
+            okhttplog         : "com.squareup.okhttp3:logging-interceptor:$sdkVersion.okhttpVersion",
+            retrofit2         : "com.squareup.retrofit2:retrofit:$sdkVersion.retrofit2Version",
+            retrofit2gson     : "com.squareup.retrofit2:converter-gson:$sdkVersion.retrofit2Version",
+            retrofit2converter: "com.squareup.retrofit2:converter-scalars:$sdkVersion.retrofit2Version",
+            retrofit2adapter  : "com.squareup.retrofit2:adapter-rxjava2:$sdkVersion.retrofit2Version",
+            retrofiturlmanager: "me.jessyan:retrofit-url-manager:1.4.0",
+            rxjava2           : "io.reactivex.rxjava2:rxjava:2.1.16",
+            rxandroid2        : "io.reactivex.rxjava2:rxandroid:2.0.2",
+            multidex          : "com.android.support:multidex:1.0.3",
+            utils             : "com.blankj:utilcode:1.23.4",
+            baseadapter       : "com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.40",
+            glide             : "com.github.bumptech.glide:glide:$sdkVersion.glideVersion",
+            imagepreview      : "com.ycjiang:ImagePreview:2.2.3",
+            crash             : "com.github.zmemo:CrashHunter:1.0.2",
+            agentweb          : "com.just.agentweb:agentweb:4.0.2",
+            arouter           : "com.alibaba:arouter-api:1.4.1"
+    ]
+
+    widget = [
+            recyclerview      : "com.android.support:recyclerview-v7:$sdkVersion.suppertVersion",
+            cardview          : "com.android.support:cardview-v7:$sdkVersion.suppertVersion",
+            constraintlayout  : "com.android.support.constraint:constraint-layout:1.1.3",
+            banner            : "com.youth.banner:banner:1.4.10",
+            smartrefreshlayout: "com.scwang.smartrefresh:SmartRefreshLayout:1.0.5.1",
+            basepopup         : "com.github.razerdp:BasePopup:2.1.9",
+            supertextview     : "com.github.lygttpod:SuperTextView:2.2.0"
+    ]
+
+    kapt = [
+            glide: "com.github.bumptech.glide:compiler:$sdkVersion.glideVersion",
+            arouter:"com.alibaba:arouter-compiler:1.2.2"
+    ]
+
+
+    release = [
+            leakcanarynoop: "com.squareup.leakcanary:leakcanary-android-no-op:$sdkVersion.leakCanaryVersion"
+    ]
+
+    debug = [
+            leakcanary        : "com.squareup.leakcanary:leakcanary-android:$sdkVersion.leakCanaryVersion",
+            leakcanaryfragment: "com.squareup.leakcanary:leakcanary-support-fragment:$sdkVersion.leakCanaryVersion"
+    ]
+
+    testLib = test.values()
+    androidTestLib = androidTest.values()
+
+    utilsLib = utils.values()
+    supportLib = support.values()
+    widgetLib = widget.values()
+
+    kaptLib = kapt.values()
+
+    releaseLib = release.values()
+
+    debugLib = debug.values()
+
+}

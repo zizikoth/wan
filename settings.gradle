@@ -1,0 +1,1 @@
+include ':app', ':iFrameBase', ':moduleCommon', ':moduleHome', ':moduleMine', ':moduleNavigation', ':moduleProject', ':ModuleLogin'

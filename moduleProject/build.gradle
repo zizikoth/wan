@@ -1,0 +1,52 @@
+if (moduleProjectRunAlone.toBoolean()) {
+    apply plugin: 'com.android.application'
+} else {
+    apply plugin: 'com.android.library'
+}
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+android {
+    compileSdkVersion rootProject.ext.root.compileSdkVersion
+    defaultConfig {
+        if (moduleProjectRunAlone.toBoolean()) {
+            applicationId rootProject.ext.root.applicationId
+        }
+        minSdkVersion rootProject.ext.root.minSdkVersion
+        targetSdkVersion rootProject.ext.root.targetSdkVersion
+        versionCode rootProject.ext.root.versionCode
+        versionName rootProject.ext.root.versionName
+        testInstrumentationRunner rootProject.ext.test.testInstrumentationRunner
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    sourceSets {
+        main {
+            if (moduleProjectRunAlone.toBoolean()) {
+                manifest.srcFile 'src/main/manifest/application/AndroidManifest.xml'
+            } else {
+                manifest.srcFile 'src/main/manifest/module/AndroidManifest.xml'
+            }
+        }
+    }
+
+    kapt {
+        arguments {
+            arg("AROUTER_MODULE_NAME", project.getName())
+        }
+    }
+
+}
+
+dependencies {
+    testImplementation rootProject.ext.testLib
+    androidTestImplementation rootProject.ext.androidTestLib
+    implementation project(':iFrameBase')
+}

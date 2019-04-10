@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:background="@color/color_F5F5F5"
+	android:orientation="vertical"
+	tools:context=".module.ui.main.MainActivity">
+	
+	<FrameLayout
+		android:id="@+id/mFlContainer"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:layout_marginBottom="@dimen/dp50" />
+	
+	<com.memo.iframe.widget.bottomnavigationview.BottomNavigationViewEx
+		android:id="@+id/mBottomView"
+		android:layout_width="match_parent"
+		android:layout_height="@dimen/dp50"
+		android:layout_gravity="bottom"
+		android:background="@color/white"
+		android:foreground="?selectableItemBackground"
+		app:itemIconSize="@dimen/dp20"
+		app:itemIconTint="@color/bottom_navigation"
+		app:itemTextColor="@color/bottom_navigation"
+		app:menu="@menu/menu_bottom_navigation" />
+</FrameLayout>
