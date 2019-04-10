@@ -3,7 +3,7 @@ package com.memo.iframe.base.application
 import android.app.Application
 import android.content.Context
 import android.support.annotation.NonNull
-import android.support.multidex.MultiDexApplication
+import android.support.multidex.MultiDex
 import android.support.v4.content.ContextCompat
 import com.alibaba.android.arouter.launcher.ARouter
 import com.blankj.utilcode.util.LogUtils
@@ -30,7 +30,7 @@ import java.util.*
  * @author zhou
  * @date 2018-11-15 下午6:03
  */
-open class BaseApplication : MultiDexApplication() {
+open class BaseApplication : Application() {
 
     init {
         initRefresh()
@@ -38,6 +38,11 @@ open class BaseApplication : MultiDexApplication() {
 
     companion object {
         lateinit var app: Application
+    }
+
+    override fun attachBaseContext(base: Context) {
+        super.attachBaseContext(base)
+        MultiDex.install(this)
     }
 
     override fun onCreate() {
@@ -73,6 +78,7 @@ open class BaseApplication : MultiDexApplication() {
             // 打印日志的时候打印线程堆栈
             ARouter.printStackTrace()
         }
+        ARouter.init(this)
 
     }
 

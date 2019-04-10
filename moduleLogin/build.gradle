@@ -11,21 +11,16 @@ android {
     compileSdkVersion rootProject.ext.root.compileSdkVersion
     defaultConfig {
         if (moduleLoginRunAlone.toBoolean()) {
-            applicationId rootProject.ext.root.applicationId
+            applicationId rootProject.ext.root.applicationId+project.getName()
         }
         minSdkVersion rootProject.ext.root.minSdkVersion
         targetSdkVersion rootProject.ext.root.targetSdkVersion
         versionCode rootProject.ext.root.versionCode
         versionName rootProject.ext.root.versionName
         testInstrumentationRunner rootProject.ext.test.testInstrumentationRunner
+        multiDexEnabled true
     }
 
-    buildTypes {
-        release {
-            minifyEnabled true
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-        }
-    }
 
     sourceSets {
         main {
@@ -36,17 +31,18 @@ android {
             }
         }
     }
+}
 
-    kapt {
-        arguments {
-            arg("AROUTER_MODULE_NAME", project.getName())
-        }
+kapt {
+    arguments {
+        arg("AROUTER_MODULE_NAME", project.getName())
     }
-
 }
 
 dependencies {
     testImplementation rootProject.ext.testLib
     androidTestImplementation rootProject.ext.androidTestLib
+    kapt rootProject.ext.routerLib
+    if(moduleLoginRunAlone) implementation project(':moduleCommon')
     implementation project(':iFrameBase')
 }

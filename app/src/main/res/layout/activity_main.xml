@@ -15,14 +15,14 @@
 		android:layout_marginBottom="@dimen/dp50" />
 	
 	<com.memo.iframe.widget.bottomnavigationview.BottomNavigationViewEx
-		android:id="@+id/mBottomView"
-		android:layout_width="match_parent"
-		android:layout_height="@dimen/dp50"
-		android:layout_gravity="bottom"
-		android:background="@color/white"
-		android:foreground="?selectableItemBackground"
-		app:itemIconSize="@dimen/dp20"
-		app:itemIconTint="@color/bottom_navigation"
-		app:itemTextColor="@color/bottom_navigation"
-		app:menu="@menu/menu_bottom_navigation" />
+			android:id="@+id/mBottomView"
+			android:layout_width="match_parent"
+			android:layout_height="@dimen/dp50"
+			android:layout_gravity="bottom"
+			android:background="@color/white"
+			android:foreground="?selectableItemBackgroundBorderless"
+			app:itemIconSize="@dimen/dp20"
+			app:itemIconTint="@color/bottom_navigation"
+			app:itemTextColor="@color/bottom_navigation"
+			app:menu="@menu/menu_bottom_navigation"/>
 </FrameLayout>

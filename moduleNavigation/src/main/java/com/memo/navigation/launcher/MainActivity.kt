@@ -1,8 +1,8 @@
 package com.memo.navigation.launcher
 
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import com.memo.navigation.R
+import android.support.v7.app.AppCompatActivity
+import com.memo.common.R
 
 class MainActivity : AppCompatActivity() {
 

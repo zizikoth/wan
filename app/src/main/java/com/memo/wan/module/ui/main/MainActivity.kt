@@ -2,7 +2,7 @@ package com.memo.wan.module.ui.main
 
 import android.content.Intent
 import android.support.v4.app.Fragment
-import com.memo.home.ui.home.HomeFragment
+import com.memo.home.ui.fragment.home.HomeFragment
 import com.memo.iframe.base.activity.BaseActivity
 import com.memo.iframe.tools.ext.gone
 import com.memo.iframe.tools.utils.ClickHelper
@@ -52,11 +52,8 @@ class MainActivity : BaseActivity() {
 
         //设置Fragment
         fragmentHelper
-            .add(mHomeFragment1)
-            .add(mHomeFragment2)
-            .add(mHomeFragment3)
-            .add(mHomeFragment4)
-            .lazyShow()
+            .add(mHomeFragment1, mHomeFragment2, mHomeFragment3, mHomeFragment4)
+            .show()
     }
 
     /**

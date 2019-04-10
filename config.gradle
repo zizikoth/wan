@@ -5,7 +5,7 @@ ext {
             targetSdkVersion         : 28,
             versionCode              : 1000,
             versionName              : "1.0.0",
-            applicationId            : "zhou.memo.iframe",
+            applicationId            : "zhou.memo.wan",
             testInstrumentationRunner: "android.support.test.runner.AndroidJUnitRunner"
     ]
 
@@ -67,6 +67,9 @@ ext {
 
     kapt = [
             glide: "com.github.bumptech.glide:compiler:$sdkVersion.glideVersion",
+    ]
+
+    router = [
             arouter:"com.alibaba:arouter-compiler:1.2.2"
     ]
 
@@ -88,6 +91,7 @@ ext {
     widgetLib = widget.values()
 
     kaptLib = kapt.values()
+    routerLib = router.values()
 
     releaseLib = release.values()
 

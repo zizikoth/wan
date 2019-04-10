@@ -3,12 +3,15 @@
           xmlns:tools="http://schemas.android.com/tools" package="com.memo.project">
 
     <application
+            android:name="com.memo.iframe.base.application.BaseApplication"
             android:allowBackup="true"
             android:icon="@mipmap/ic_launcher"
-            android:label="@string/app_name"
+            android:label="ModuleProject"
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
-            android:theme="@style/AppTheme" tools:ignore="AllowBackup,GoogleAppIndexingWarning">
+            android:theme="@style/AppTheme"
+            tools:replace="label"
+            tools:ignore="AllowBackup,GoogleAppIndexingWarning">
         <activity android:name=".launcher.MainActivity"
                   android:screenOrientation="portrait">
             <intent-filter>

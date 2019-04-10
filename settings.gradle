@@ -1,1 +1,8 @@
-include ':app', ':iFrameBase', ':moduleCommon', ':moduleHome', ':moduleMine', ':moduleNavigation', ':moduleProject', ':ModuleLogin'
+include ':app',
+        ':moduleHome',
+        ':moduleMine',
+        ':moduleNavigation',
+        ':moduleProject',
+        ':ModuleLogin',
+        ':moduleCommon',
+        ':iFrameBase'

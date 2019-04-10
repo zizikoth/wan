@@ -3,7 +3,6 @@ package com.memo.iframe.config.api
 import com.google.gson.GsonBuilder
 import com.memo.iframe.config.controller.AppController
 import com.memo.iframe.tools.net.interceptor.HttpLogInterceptor
-import com.memo.wan.config.api.ApiService
 import me.jessyan.retrofiturlmanager.RetrofitUrlManager
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
@@ -21,11 +20,14 @@ import java.util.concurrent.TimeUnit
  */
 class ApiClient private constructor() {
 
-    var mApi: ApiService
+    var mRetrofit: Retrofit
 
     companion object {
-        private val instance: ApiClient by lazy { ApiClient() }
-        val mApiService: ApiService by lazy { instance.mApi }
+        private val INSTANCE: ApiClient by lazy(mode = LazyThreadSafetyMode.SYNCHRONIZED) {
+            ApiClient()
+        }
+
+        fun <T> create(service: Class<T>): T = INSTANCE.mRetrofit.create(service)
     }
 
     init {
@@ -47,14 +49,12 @@ class ApiClient private constructor() {
             .disableHtmlEscaping()
             .create()
 
-        val mRetrofit = Retrofit.Builder()
+        mRetrofit = Retrofit.Builder()
             .baseUrl(Api.BASE_URL)
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .addConverterFactory(GsonConverterFactory.create(gson))
             .client(mOkHttpClient)
             .build()
-
-        mApi = mRetrofit.create(ApiService::class.java)
 
     }
 

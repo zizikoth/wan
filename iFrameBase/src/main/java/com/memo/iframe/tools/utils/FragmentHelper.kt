@@ -1,6 +1,5 @@
 package com.memo.iframe.tools.utils
 
-import android.annotation.SuppressLint
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import java.util.*
@@ -24,25 +23,16 @@ class FragmentHelper constructor(containerResId: Int, fragmentManager: FragmentM
     private val mStack: Stack<Fragment> by lazy { Stack<Fragment>() }
 
     /*** 最后一个显示的下标 ***/
-    private var mLastIndex: Int = 0
-
-    /**
-     *  添加一个Fragment
-     */
-    @SuppressLint("CommitTransaction")
-    fun add(fragment: Fragment): FragmentHelper {
-        if (!mStack.contains(fragment)) {
-            mStack.add(fragment)
-        }
-        return this
-    }
+    private var mLastIndex: Int = -1
 
     /**
      * 添加Fragment列表
      */
     fun add(vararg fragments: Fragment): FragmentHelper {
-        for (fragment in fragments) {
-            add(fragment)
+        for (fragment: Fragment in fragments) {
+            if (!mStack.contains(fragment)) {
+                mStack.add(fragment)
+            }
         }
         return this
     }
@@ -50,17 +40,16 @@ class FragmentHelper constructor(containerResId: Int, fragmentManager: FragmentM
     /**
      * 显示界面
      */
-    fun show() {
-        val beginTransaction = mFragmentManager.beginTransaction()
-        for ((index, fragment) in mStack.withIndex()) {
-            beginTransaction.add(mContainerResId, fragment)
-            if (0 != index) {
-                beginTransaction.hide(fragment)
-            } else {
-                beginTransaction.show(fragment)
-            }
-        }
-        beginTransaction.commitAllowingStateLoss()
+    fun show(index: Int = 0) {
+        change(index)
+    }
+
+    /*** lazy ***/
+    fun lazyShow() {
+        mFragmentManager.beginTransaction()
+            .add(mContainerResId, mStack[0])
+            .commitAllowingStateLoss()
+        mLastIndex = 0
     }
 
     /**
@@ -84,13 +73,5 @@ class FragmentHelper constructor(containerResId: Int, fragmentManager: FragmentM
             beginTransaction.commitAllowingStateLoss()
             mLastIndex = index
         }
-    }
-
-
-    /*** lazy ***/
-    fun lazyShow() {
-        mFragmentManager.beginTransaction()
-                .add(mContainerResId, mStack[0])
-                .commitAllowingStateLoss()
     }
 }
