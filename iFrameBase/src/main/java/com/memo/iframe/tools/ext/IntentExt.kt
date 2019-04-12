@@ -22,11 +22,23 @@ inline fun <reified T : Activity> Context.startActivity(vararg params: Pair<Stri
 inline fun <reified T : Activity> Activity.startActivityForResult(vararg params: Pair<String, Any?>, requestCode: Int) =
     internalStartActivityForResult(this, T::class.java, params, requestCode)
 
+inline fun <reified T : Activity> Context.startActivityAndFinish(vararg params: Pair<String, Any?>) {
+    internalStartActivity(this, T::class.java, params)
+    if (this is Activity) {
+        this.finish()
+    }
+}
+
 inline fun <reified T : Activity> Fragment.startActivity(vararg params: Pair<String, Any?>) =
     internalStartActivity(activity!!, T::class.java, params)
 
 inline fun <reified T : Activity> Fragment.startActivityForResult(vararg params: Pair<String, Any?>, requestCode: Int) =
     internalStartActivityForResult(this, T::class.java, params, requestCode)
+
+inline fun <reified T : Activity> Fragment.startActivityAndFinish(vararg params: Pair<String, Any?>) {
+    internalStartActivity(activity!!, T::class.java, params)
+    activity!!.finish()
+}
 
 
 fun internalStartActivity(context: Context, activity: Class<out Activity>, params: Array<out Pair<String, Any?>>) =

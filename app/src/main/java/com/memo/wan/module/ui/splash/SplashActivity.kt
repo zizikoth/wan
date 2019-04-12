@@ -3,9 +3,8 @@ package com.memo.wan.module.ui.splash
 import android.content.Intent
 import com.blankj.utilcode.util.BarUtils
 import com.memo.iframe.base.activity.BaseActivity
-import com.memo.iframe.tools.ext.startActivity
+import com.memo.iframe.tools.arouter.ARouterClient
 import com.memo.iframe.tools.handler.WeakHandler
-import com.memo.wan.module.ui.main.MainActivity
 
 /**
  * title:启动页
@@ -42,7 +41,7 @@ class SplashActivity : BaseActivity() {
      */
     override fun start() {
         mHandler.postDelayed({
-            startActivity<MainActivity>()
+            ARouterClient.startLogin()
             finish()
         }, 1000)
     }

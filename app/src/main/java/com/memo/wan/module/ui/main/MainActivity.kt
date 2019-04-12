@@ -2,12 +2,14 @@ package com.memo.wan.module.ui.main
 
 import android.content.Intent
 import android.support.v4.app.Fragment
+import com.alibaba.android.arouter.facade.annotation.Route
 import com.memo.home.ui.fragment.home.HomeFragment
 import com.memo.iframe.base.activity.BaseActivity
+import com.memo.iframe.tools.arouter.ARouterPath
 import com.memo.iframe.tools.ext.gone
 import com.memo.iframe.tools.utils.ClickHelper
-import com.memo.iframe.tools.utils.CommonHelper
 import com.memo.iframe.tools.utils.FragmentHelper
+import com.memo.iframe.tools.utils.cancelToast
 import com.memo.wan.R
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -18,6 +20,7 @@ import kotlinx.android.synthetic.main.activity_main.*
  * @author zhou
  * @date 2019-03-11 15:02
  */
+@Route(path = ARouterPath.Main.MainActivity)
 class MainActivity : BaseActivity() {
 
     /*** 不显示状态控件 ***/
@@ -85,7 +88,7 @@ class MainActivity : BaseActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
-        CommonHelper.cancelToast()
+        cancelToast()
     }
 
 }

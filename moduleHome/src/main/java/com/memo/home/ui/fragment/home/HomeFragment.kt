@@ -5,7 +5,7 @@ import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.view.View
 import com.alibaba.android.arouter.facade.annotation.Route
-import com.memo.common.R
+import com.memo.home.R
 import com.memo.home.config.entity.ArticleData
 import com.memo.home.config.entity.MainBanner
 import com.memo.home.config.entity.MainData

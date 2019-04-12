@@ -15,16 +15,18 @@ import android.view.MotionEvent
  */
 class ScrollViewPager : ViewPager {
 
-    /**
-     * 是否可以滑动
-     *
-     * @return true 可以 false 不可以
-     */
-    var isCanScrollable = false
+    private var isCanScrollable = false
 
     constructor(context: Context) : super(context)
 
     constructor(context: Context, attrs: AttributeSet) : super(context, attrs)
+
+    /**
+     * 是否可以滑动
+     */
+    fun isScrollAble(isScrollAble: Boolean) {
+        isCanScrollable = isScrollAble
+    }
 
     @SuppressLint("ClickableViewAccessibility")
     override fun onTouchEvent(ev: MotionEvent): Boolean {

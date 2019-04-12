@@ -2,6 +2,7 @@ package com.memo.home.config.api
 
 import com.memo.home.config.entity.MainArticle
 import com.memo.home.config.entity.MainBanner
+import com.memo.iframe.config.api.ApiClient
 import com.memo.iframe.config.entity.BaseResponse
 import io.reactivex.Observable
 import retrofit2.http.GET
@@ -13,6 +14,15 @@ import retrofit2.http.Path
  *
  * @author zhou
  * @date 2019-02-25 17:15
+ */
+
+/**
+ * 创建API
+ */
+val HomeApi: HomeApiService by lazy { ApiClient.create(HomeApiService::class.java) }
+
+/**
+ * API接口
  */
 interface HomeApiService {
 

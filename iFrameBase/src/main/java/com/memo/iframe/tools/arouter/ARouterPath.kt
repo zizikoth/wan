@@ -10,10 +10,24 @@ package com.memo.iframe.tools.arouter
 object ARouterPath {
 
     /**
+     * App模块
+     */
+    object Main {
+        const val MainActivity: String = "/Main/MainActivity"
+    }
+
+    /**
      * 通用模块路径
      */
     object Common {
         const val AgentWebActivity: String = "/Common/AgentWebActivity"
+    }
+
+    /**
+     * 登陆模块
+     */
+    object Login {
+        const val LoginActivity: String = "/Login/LoginActivity"
     }
 
     /**
@@ -26,22 +40,16 @@ object ARouterPath {
     /**
      * 导航模块路径
      */
-    object Navigation {
-
-    }
+    object Navigation
 
     /**
      * 项目模块路径
      */
-    object Project {
-
-    }
+    object Project
 
     /**
      * 我的模块路径
      */
-    object Mine {
-
-    }
+    object Mine
 
 }

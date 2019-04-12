@@ -17,6 +17,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+import org.jetbrains.annotations.NotNull;
+
 /**
  * Created by yqritc on 2015/01/08.
  */
@@ -91,7 +93,7 @@ public abstract class BaseDividerDecoration extends RecyclerView.ItemDecoration 
     }
 
     @Override
-    public void onDraw(Canvas c, RecyclerView parent, RecyclerView.State state) {
+    public void onDraw(@NotNull Canvas c, @NotNull RecyclerView parent, @NotNull RecyclerView.State state) {
         RecyclerView.Adapter adapter = parent.getAdapter();
         if (adapter == null) {
             return;
@@ -147,7 +149,7 @@ public abstract class BaseDividerDecoration extends RecyclerView.ItemDecoration 
     }
 
     @Override
-    public void getItemOffsets(Rect rect, View v, RecyclerView parent, RecyclerView.State state) {
+    public void getItemOffsets(@NotNull Rect rect, @NotNull View v, @NotNull RecyclerView parent, @NotNull RecyclerView.State state) {
         int position = parent.getChildAdapterPosition(v);
         int itemCount = parent.getAdapter().getItemCount();
         int lastDividerOffset = getLastDividerOffset(parent);
@@ -294,12 +296,12 @@ public abstract class BaseDividerDecoration extends RecyclerView.ItemDecoration 
     }
 
     /**
-     * Interface for controlling drawable object for divider drawing
+     * Interface for controlling drawable-xhdpi object for divider drawing
      */
     public interface DrawableProvider {
 
         /**
-         * Returns drawable instance for divider
+         * Returns drawable-xhdpi instance for divider
          *
          * @param position Divider position (or group index for GridLayoutManager)
          * @param parent   RecyclerView

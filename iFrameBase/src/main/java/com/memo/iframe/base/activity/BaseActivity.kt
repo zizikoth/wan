@@ -115,7 +115,7 @@ abstract class BaseActivity : AppCompatActivity(), IView {
      */
     private fun initBase() {
         if (transparentStatusBar()) {
-            StatusBarHelper.setTranslucent(this, 50)
+            StatusBarHelper.setTranslucentForImageView(this, 50, null)
         } else {
             StatusBarHelper.setColor(this, color(bindStatusBarColor()), 50)
         }

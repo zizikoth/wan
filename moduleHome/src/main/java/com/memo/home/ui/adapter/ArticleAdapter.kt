@@ -2,7 +2,7 @@ package com.memo.home.ui.adapter
 
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.BaseViewHolder
-import com.memo.common.R
+import com.memo.home.R
 import com.memo.home.config.entity.ArticleData
 import com.memo.iframe.tools.ext.toTimeSpanDescribe
 

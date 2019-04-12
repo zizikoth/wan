@@ -1,6 +1,5 @@
 package com.memo.iframe.tools.utils
 
-import android.util.Log
 import com.blankj.utilcode.util.ActivityUtils
 
 /**
@@ -57,7 +56,7 @@ object ClickHelper {
     fun doubleClickExit() {
         val now = System.currentTimeMillis()
         if(now - exitLastClickTime >1500){
-            CommonHelper.toast("再次点击退出应用")
+            toast("再次点击退出应用")
             exitLastClickTime = now
         }else{
             ActivityUtils.finishAllActivities(true)

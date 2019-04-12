@@ -1,6 +1,5 @@
 package com.memo.common.web
 
-import android.content.Context
 import android.content.Intent
 import android.view.ViewGroup
 import com.alibaba.android.arouter.facade.annotation.Route
@@ -22,16 +21,6 @@ class AgentWebActivity : BaseActivity() {
 
     /*** 不显示状态控件 ***/
     override fun showStatusView(): Boolean = false
-
-    companion object {
-        fun start(context: Context, title: String, url: String) {
-            context.startActivity(
-                    Intent(context, AgentWebActivity::class.java)
-                            .putExtra("title", title)
-                            .putExtra("url", url)
-            )
-        }
-    }
 
     /*** 网页地址 ***/
     private var url: String = ""

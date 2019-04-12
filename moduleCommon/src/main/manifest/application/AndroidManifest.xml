@@ -10,8 +10,8 @@
             android:label="ModuleCommon"
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
-            android:theme="@style/AppTheme"
-            tools:replace="android:label"
+        android:theme="@style/IFrameTheme"
+        tools:replace="android:label,theme"
             tools:ignore="AllowBackup,GoogleAppIndexingWarning">
 
         <activity

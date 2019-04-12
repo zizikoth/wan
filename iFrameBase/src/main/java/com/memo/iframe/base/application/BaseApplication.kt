@@ -8,6 +8,7 @@ import android.support.v4.content.ContextCompat
 import com.alibaba.android.arouter.launcher.ARouter
 import com.blankj.utilcode.util.LogUtils
 import com.blankj.utilcode.util.Utils
+import com.just.agentweb.AgentWebConfig
 import com.memo.crashhunter.CrashHunter
 import com.memo.iframe.BuildConfig
 import com.memo.iframe.R
@@ -19,6 +20,7 @@ import com.scwang.smartrefresh.layout.api.*
 import com.scwang.smartrefresh.layout.constant.SpinnerStyle
 import com.scwang.smartrefresh.layout.footer.BallPulseFooter
 import com.scwang.smartrefresh.layout.header.ClassicsHeader
+import com.squareup.leakcanary.LeakCanary
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -50,26 +52,26 @@ open class BaseApplication : Application() {
         app = this
 
         //初始化崩溃界面
-        CrashHunter.init(this).isDebug(AppController.isShowCrash)
+        initCrash()
 
         //初始化AndroidUtilCode
-        Utils.init(this)
-
-        //初始化日志打印
-        LogUtils.getConfig()
-            .setLogSwitch(AppController.isOpenLog)
-            .setLogHeadSwitch(AppController.isOpenLog)
-            .setLog2FileSwitch(AppController.isOpenLog)
-            .globalTag = "iFrame"
+        initUtils()
 
         //初始化内存监听
-        //        if (!LeakCanary.isInAnalyzerProcess(this)) {
-        //            LeakCanary.install(this)
-        //        }
+        //initLeak()
 
         //大图预览
-        ZoomMediaLoader.getInstance().init(PreviewImageLoader())
+        initPreview()
 
+        //配置Arouter
+        initArouter()
+
+        //配置AgentWeb
+        initAgentWeb()
+
+    }
+
+    private fun initArouter() {
         if (BuildConfig.DEBUG) {
             // 开启日志
             ARouter.openLog()
@@ -79,7 +81,36 @@ open class BaseApplication : Application() {
             ARouter.printStackTrace()
         }
         ARouter.init(this)
+    }
 
+    private fun initCrash() {
+        CrashHunter.init(this).isDebug(AppController.isShowCrash)
+    }
+
+    private fun initUtils() {
+        Utils.init(this)
+        //初始化日志打印
+        LogUtils.getConfig()
+            .setLogSwitch(AppController.isOpenLog)
+            .setLogHeadSwitch(AppController.isOpenLog)
+            .setLog2FileSwitch(AppController.isOpenLog)
+            .globalTag = "iFrame"
+    }
+
+    private fun initLeak() {
+        if (!LeakCanary.isInAnalyzerProcess(this)) {
+            LeakCanary.install(this)
+        }
+    }
+
+    private fun initPreview() {
+        ZoomMediaLoader.getInstance().init(PreviewImageLoader())
+    }
+
+    private fun initAgentWeb() {
+        if (AppController.isDebug) {
+            AgentWebConfig.debug()
+        }
     }
 
     private fun initRefresh() {

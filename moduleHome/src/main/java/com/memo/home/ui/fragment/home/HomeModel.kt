@@ -1,10 +1,9 @@
 package com.memo.home.ui.fragment.home
 
-import com.memo.home.config.api.HomeApiService
+import com.memo.home.config.api.HomeApi
 import com.memo.home.config.entity.MainArticle
 import com.memo.home.config.entity.MainBanner
 import com.memo.home.config.entity.MainData
-import com.memo.iframe.config.api.ApiClient
 import com.memo.iframe.config.api.convert
 import com.memo.iframe.tools.utils.RxSchedulersHelper
 import io.reactivex.Observable
@@ -24,7 +23,7 @@ class HomeModel : HomeContract.Model {
      * @param page 页码
      */
     override fun getMainArticle(page: Int): Observable<MainArticle> =
-        ApiClient.create(HomeApiService::class.java).getMainArticles(page).convert()
+        HomeApi.getMainArticles(page).convert()
 
 
     /**
@@ -32,8 +31,8 @@ class HomeModel : HomeContract.Model {
      * @param page 页码
      */
     override fun getMainData(page: Int): Observable<MainData> {
-        val articles = ApiClient.create(HomeApiService::class.java).getMainArticles(page).convert()
-        val banners = ApiClient.create(HomeApiService::class.java).getMainBanner().convert()
+        val articles = HomeApi.getMainArticles(page).convert()
+        val banners = HomeApi.getMainBanner().convert()
         return Observable.zip(articles, banners,
             BiFunction<MainArticle, List<MainBanner>, MainData> { article, banner ->
                 MainData(article, banner)
