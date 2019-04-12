@@ -7,11 +7,11 @@ import com.memo.login.R
 import com.memo.login.ui.activity.login.LoginActivity
 
 /**
- * title:登陆模块的主界面
+ * title:单独运行时的主界面
  * describe:
  *
  * @author zhou
- * @date 2019-04-12 16:21
+ * @date 2019-04-11 00:17
  */
 class MainActivity : AppCompatActivity() {
 
