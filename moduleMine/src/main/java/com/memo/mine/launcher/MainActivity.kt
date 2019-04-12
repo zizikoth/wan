@@ -5,7 +5,7 @@ import android.support.v7.app.AppCompatActivity
 import com.memo.mine.R
 
 /**
- * title:单独运行时的主界面
+ * title:单独运行时的主界面dev
  * describe:
  *
  * @author zhou
