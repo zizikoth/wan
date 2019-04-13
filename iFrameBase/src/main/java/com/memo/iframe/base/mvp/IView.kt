@@ -16,6 +16,7 @@ interface IView {
      */
     fun showLoading(tip: String = "加载中")
 
+
     /**
      * 显示网络错误
      */

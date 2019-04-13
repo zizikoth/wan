@@ -2,6 +2,8 @@ package com.memo.iframe.config.api
 
 import com.google.gson.GsonBuilder
 import com.memo.iframe.config.controller.AppController
+import com.memo.iframe.tools.net.interceptor.CookieInterceptor
+import com.memo.iframe.tools.net.interceptor.HeaderInterceptor
 import com.memo.iframe.tools.net.interceptor.HttpLogInterceptor
 import me.jessyan.retrofiturlmanager.RetrofitUrlManager
 import okhttp3.OkHttpClient
@@ -31,14 +33,17 @@ class ApiClient private constructor() {
     }
 
     init {
+
         val mOkHttpClient = RetrofitUrlManager.getInstance()
             .with(OkHttpClient.Builder())
             .addInterceptor(HttpLogInterceptor(AppController.isOpenLog, "Http"))
+            .addInterceptor(HeaderInterceptor())
+            .addInterceptor(CookieInterceptor())
+            .retryOnConnectionFailure(true)
             .readTimeout(5, TimeUnit.SECONDS)
             .connectTimeout(5, TimeUnit.SECONDS)
             .writeTimeout(5, TimeUnit.SECONDS)
             .build()
-
         //Gson配置
         val gson = GsonBuilder()
             //当字段值为空或null时，依然对该字段进行转换

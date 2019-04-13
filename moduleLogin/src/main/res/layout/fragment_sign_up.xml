@@ -9,7 +9,7 @@
     android:orientation="vertical"
     android:paddingStart="@dimen/dp25"
     android:paddingEnd="@dimen/dp25"
-    tools:context=".ui.fragment.signin.SignInFragment"
+    tools:context=".ui.fragment.signup.SignUpFragment"
     tools:layout_height="@dimen/dp400"
     tools:layout_width="@dimen/dp300">
     
@@ -30,7 +30,7 @@
             android:inputType="text"
             android:lines="1"
             android:textColor="@color/color_666666"
-            android:textSize="16sp"
+            android:textSize="@dimen/sp16"
             android:textStyle="bold" />
         
         <View
@@ -50,7 +50,7 @@
             android:inputType="textPassword"
             android:lines="1"
             android:textColor="@color/color_666666"
-            android:textSize="16sp"
+            android:textSize="@dimen/sp16"
             android:textStyle="bold" />
         
         <View
@@ -70,24 +70,40 @@
             android:inputType="textPassword"
             android:lines="1"
             android:textColor="@color/color_666666"
-            android:textSize="16sp"
+            android:textSize="@dimen/sp16"
             android:textStyle="bold" />
     
     </LinearLayout>
     
-    <com.ruffian.library.widget.RTextView
-        android:id="@+id/mTvSignUp"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp50"
+        android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/dp15"
         android:layout_marginTop="@dimen/dp25"
         android:layout_marginEnd="@dimen/dp15"
-        android:layout_marginBottom="@dimen/dp45"
-        android:gravity="center"
-        android:text="SIGN UP"
-        android:textColor="@color/white"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:background_normal="@color/color_main"
-        app:corner_radius="@dimen/dp25" />
+        android:layout_marginBottom="@dimen/dp45">
+        
+        <com.ruffian.library.widget.RTextView
+            android:id="@+id/mTvSignUp"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp50"
+            android:gravity="center"
+            android:text="SIGN UP"
+            android:textColor="@color/white"
+            android:textSize="@dimen/sp18"
+            android:textStyle="bold"
+            app:background_normal="@color/color_main"
+            app:corner_radius="@dimen/dp25" />
+        
+        <ProgressBar
+            android:id="@+id/mProgress"
+            android:layout_width="@dimen/dp100"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@color/color_main"
+            android:indeterminateTint="@color/white"
+            android:visibility="gone"
+            tools:targetApi="lollipop" />
+    </FrameLayout>
+
 </LinearLayout>

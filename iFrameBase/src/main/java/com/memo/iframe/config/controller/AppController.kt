@@ -8,6 +8,13 @@ package com.memo.iframe.config.controller
  * @date 2019-01-29 16:44
  */
 object AppController {
+
+    /**
+     * 注意在打包的时候注意清除用户信息
+     */
+    const val account: String = "zhoumemo"
+    const val pwd: String = "12345678"
+
     /**
      * 是否开启日志打印
      */
@@ -16,7 +23,7 @@ object AppController {
     /**
      * 是否开启崩溃展示界面
      */
-    const val isShowCrash:Boolean = true
+    const val isShowCrash: Boolean = true
 
     //注意 如果不是测试 不是预发布 那么就是线上发布版本
     /**

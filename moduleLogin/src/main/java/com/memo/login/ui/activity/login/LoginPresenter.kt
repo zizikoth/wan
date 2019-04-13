@@ -2,7 +2,6 @@ package com.memo.login.ui.activity.login
 
 import com.memo.iframe.base.mvp.BasePresenter
 import com.memo.iframe.config.api.execute
-import com.memo.iframe.tools.utils.log
 
 /**
  * title:
@@ -42,8 +41,7 @@ class LoginPresenter : BasePresenter<LoginModel, LoginContract.View>(), LoginCon
     override fun signUp(account: String, pwd: String, rePwd: String) {
         mModel.signUp(account, pwd, rePwd)
             .execute(mView) {
-                log(it)
-                mView.onSignInSuccess()
+                signIn(account, pwd)
             }
     }
 

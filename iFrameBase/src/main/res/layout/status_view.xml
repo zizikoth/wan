@@ -1,22 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/mFlRoot"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/white">
+    android:layout_height="match_parent">
     
-    <LinearLayout
-        android:id="@+id/mStatusLoading"
+    
+    <FrameLayout
+        android:id="@+id/mStatusError"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:visibility="gone">
+        
+        <TextView
+            android:id="@+id/mTvStatusError"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:drawableTop="@drawable/status_net_error"
+            android:drawablePadding="@dimen/dp15"
+            android:gravity="center"
+            tools:text="呜呜呜，网路异常"
+            android:textColor="#666666"
+            android:textSize="@dimen/sp18" />
+    </FrameLayout>
+    
+    
+    <com.ruffian.library.widget.RLinearLayout
+        android:id="@+id/mStatusLoading"
+        android:layout_width="@dimen/dp120"
+        android:layout_height="@dimen/dp120"
+        android:layout_gravity="center"
         android:gravity="center"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        app:background_normal="#80000000"
+        app:corner_radius="@dimen/dp15">
         
         <ProgressBar
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:indeterminateTint="#3a9bff"
+            android:indeterminateTint="@color/color_main"
             tools:targetApi="lollipop" />
         
         <TextView
@@ -28,66 +51,9 @@
             android:drawablePadding="@dimen/dp15"
             android:gravity="center"
             android:text="加载中"
-            android:textColor="#666666"
+            android:textColor="@color/white"
             android:textSize="@dimen/sp18" />
-    </LinearLayout>
-    
-    <FrameLayout
-        android:id="@+id/mStatusDataError"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="gone">
-        
-        <TextView
-            android:id="@+id/mTvStatusDataError"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:drawableTop="@drawable/status_no_data"
-            android:drawablePadding="@dimen/dp15"
-            android:gravity="center"
-            android:text="啊欧，数据不存在"
-            android:textColor="#666666"
-            android:textSize="@dimen/sp18" />
-    
-    </FrameLayout>
-    
-    <FrameLayout
-        android:id="@+id/mStatusServerError"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="gone">
-        
-        <TextView
-            android:id="@+id/mTvStatusServerError"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:drawableTop="@drawable/status_server_error"
-            android:drawablePadding="@dimen/dp15"
-            android:gravity="center"
-            android:text="Boom，服务器异常"
-            android:textColor="#666666"
-            android:textSize="@dimen/sp18" />
-    </FrameLayout>
-    
-    <FrameLayout
-        android:id="@+id/mStatusNetError"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="gone">
-        
-        <TextView
-            android:id="@+id/mTvStatusNetError"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:drawableTop="@drawable/status_net_error"
-            android:drawablePadding="@dimen/dp15"
-            android:gravity="center"
-            android:text="呜呜呜，网路异常"
-            android:textColor="#666666"
-            android:textSize="@dimen/sp18" />
-    </FrameLayout>
+    </com.ruffian.library.widget.RLinearLayout>
+
 
 </FrameLayout>

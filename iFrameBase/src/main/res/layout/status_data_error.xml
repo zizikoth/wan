@@ -7,7 +7,7 @@
     <TextView
             android:id="@+id/statue_empty_view"
             android:layout_gravity="center"
-            android:drawableTop="@drawable/status_no_data"
+        android:drawableTop="@drawable/status_data_error"
             android:text="数据不存在"
             android:textSize="@dimen/sp18"
             android:textColor="#666666"

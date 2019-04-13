@@ -39,4 +39,14 @@ object ARouterClient {
             .navigation()
     }
 
+
+    /**
+     * Collect - 收藏界面
+     */
+    @JvmStatic
+    fun startCollect() {
+        ARouter.getInstance().build(ARouterPath.Collect.CollectActivity)
+            .navigation()
+    }
+
 }

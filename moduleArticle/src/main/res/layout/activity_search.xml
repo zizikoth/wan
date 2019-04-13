@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.memo.article.ui.activity.search.SearchActivity">
+    
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp20"
+        android:layout_marginTop="@dimen/dp10"
+        android:layout_marginEnd="@dimen/dp20">
+        
+        <com.ruffian.library.widget.REditText
+            android:id="@+id/mEtSearch"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp45"
+            android:gravity="center_vertical"
+            android:hint="@string/SearchHint"
+            android:inputType="text"
+            android:maxLines="1"
+            android:paddingStart="@dimen/dp15"
+            android:paddingEnd="@dimen/dp60"
+            android:textColor="@color/color_666666"
+            android:textSize="@dimen/sp16"
+            app:border_color_normal="@color/color_F5F5F5"
+            app:border_width_normal="@dimen/dp2"
+            app:corner_radius="@dimen/dp23" />
+        
+        <ImageView
+            android:id="@+id/mIvSearch"
+            android:layout_width="@dimen/dp45"
+            android:layout_height="@dimen/dp45"
+            android:layout_gravity="end"
+            android:layout_marginEnd="@dimen/dp5"
+            android:padding="@dimen/dp13"
+            android:src="@drawable/ic_search"
+            tools:ignore="ContentDescription" />
+    
+    
+    </FrameLayout>
+    
+    
+    <LinearLayout
+        android:id="@+id/mLlHotKeyword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp15"
+        android:layout_marginTop="@dimen/dp15"
+        android:layout_marginEnd="@dimen/dp15"
+        android:orientation="vertical"
+        android:visibility="gone"
+        tools:visibility="gone">
+        
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp5"
+            android:text="@string/HotSearch"
+            android:textColor="@color/color_main"
+            android:textSize="@dimen/sp18"
+            android:textStyle="bold" />
+        
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/mRvList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp15"
+            android:overScrollMode="never" />
+    
+    </LinearLayout>
+
+</LinearLayout>

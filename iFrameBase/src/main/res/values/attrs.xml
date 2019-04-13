@@ -3,6 +3,8 @@
     
     <declare-styleable name="TitleView">
         <attr name="tv_title" format="string" />
+        <attr name="tv_right_icon" format="reference" />
+        <attr name="tv_left_show" format="boolean" />
     </declare-styleable>
 
 </resources>

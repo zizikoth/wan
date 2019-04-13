@@ -1,6 +1,7 @@
 include ':app',
+        ':moduleCollect',
         ':moduleLogin',
-        ':moduleHome',
+        ':moduleArticle',
         ':moduleMine',
         ':moduleNavigation',
         ':moduleProject',

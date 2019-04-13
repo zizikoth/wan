@@ -1,0 +1,49 @@
+if (moduleArticleRunAlone.toBoolean()) {
+    apply plugin: 'com.android.application'
+} else {
+    apply plugin: 'com.android.library'
+}
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+android {
+    compileSdkVersion rootProject.ext.root.compileSdkVersion
+    defaultConfig {
+        if (moduleArticleRunAlone.toBoolean()) {
+            applicationId rootProject.ext.root.applicationId + project.getName()
+        }
+        minSdkVersion rootProject.ext.root.minSdkVersion
+        targetSdkVersion rootProject.ext.root.targetSdkVersion
+        versionCode rootProject.ext.root.versionCode
+        versionName rootProject.ext.root.versionName
+        testInstrumentationRunner rootProject.ext.test.testInstrumentationRunner
+        multiDexEnabled true
+    }
+
+    sourceSets {
+        main {
+            if (moduleArticleRunAlone.toBoolean()) {
+                manifest.srcFile 'src/main/manifest/application/AndroidManifest.xml'
+            } else {
+                manifest.srcFile 'src/main/manifest/module/AndroidManifest.xml'
+            }
+        }
+    }
+}
+
+kapt {
+    arguments {
+        arg("AROUTER_MODULE_NAME", project.getName())
+    }
+}
+
+dependencies {
+    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
+    testImplementation rootProject.ext.testLib
+    androidTestImplementation rootProject.ext.androidTestLib
+    kapt rootProject.ext.routerLib
+    if (moduleArticleRunAlone) implementation project(':moduleCommon')
+    if (moduleArticleRunAlone) implementation project(':moduleLogin')
+    implementation project(':iFrameBase')
+}

@@ -1,0 +1,5 @@
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="TypographyEllipsis">
+    <string name="app_name">ModuleArticle</string>
+    <string name="SearchHint">开始找寻新大陆...</string>
+    <string name="HotSearch">热门搜索</string>
+</resources>

@@ -1,8 +1,9 @@
 package com.memo.iframe.config.api
 
 import com.memo.iframe.base.mvp.IView
-import com.memo.iframe.tools.utils.RxSchedulersHelper
 import com.memo.iframe.config.entity.BaseResponse
+import com.memo.iframe.tools.arouter.ARouterClient
+import com.memo.iframe.tools.utils.RxSchedulersHelper
 import io.reactivex.Observable
 import io.reactivex.Observer
 import io.reactivex.disposables.Disposable
@@ -37,7 +38,7 @@ fun <T> Observable<BaseResponse<T>>.convert(): Observable<T> =
 
 
 fun <T> Observable<T>.execute(
-    view: IView,
+    view: IView?,
     isFirstLoad: Boolean,
     isShowLoading: Boolean,
     onSuccess: (T) -> Unit,
@@ -46,45 +47,47 @@ fun <T> Observable<T>.execute(
     this.compose(RxSchedulersHelper.io2Main())
         .subscribe(object : Observer<T> {
             override fun onSubscribe(disposable: Disposable) {
-                view.addDisposable(disposable)
+                view?.addDisposable(disposable)
                 if (isShowLoading) {
-                    view.showLoading()
+                    view?.showLoading()
                 }
             }
 
             override fun onNext(response: T) {
                 onSuccess(response)
-                view.hideAll()
+                view?.hideAll()
             }
 
             override fun onError(exception: Throwable) {
-                view.hideAll()
-                val errorCode: Int = ApiExceptionParser.parseException(exception)
-                when (errorCode) {
+                when (ApiExceptionParser.parseException(exception)) {
                     ApiErrorCode.SERVER_ERROR -> {
                         if (isFirstLoad) {
-                            view.showServerError()
+                            view?.showServerError()
                         } else {
-                            view.hideAll()
+                            view?.hideAll()
                         }
                     }
                     ApiErrorCode.NETWORK_ERROR -> {
                         if (isFirstLoad) {
-                            view.showNetError()
+                            view?.showNetError()
                         } else {
-                            view.hideAll()
+                            view?.hideAll()
                         }
                     }
                     ApiErrorCode.DATA_ERROR -> {
                         if (isFirstLoad) {
-                            view.showDataError()
+                            view?.showDataError()
                         } else {
-                            view.hideAll()
+                            view?.hideAll()
                         }
+                    }
+                    ApiErrorCode.TOKEN_UN_LOGIN -> {
+                        ARouterClient.startLogin()
+                        view?.hideAll()
                     }
                     else -> {
                         //这里是接口返回的errorCode
-                        view.hideAll()
+                        view?.hideAll()
                     }
                 }
                 onFailure()
@@ -96,7 +99,7 @@ fun <T> Observable<T>.execute(
 }
 
 fun <T> Observable<T>.execute(
-    view: IView,
+    view: IView?,
     isFirstLoad: Boolean,
     onSuccess: (T) -> Unit,
     onFailure: () -> Unit
@@ -105,7 +108,7 @@ fun <T> Observable<T>.execute(
 }
 
 fun <T> Observable<T>.execute(
-    view: IView,
+    view: IView?,
     isFirstLoad: Boolean,
     onSuccess: (T) -> Unit
 ) {
@@ -114,7 +117,7 @@ fun <T> Observable<T>.execute(
 
 
 fun <T> Observable<T>.execute(
-    view: IView,
+    view: IView?,
     isFirstLoad: Boolean = false,
     isShowLoading: Boolean = true,
     onSuccess: (T) -> Unit
@@ -123,11 +126,15 @@ fun <T> Observable<T>.execute(
 }
 
 fun <T> Observable<T>.execute(
-    view: IView,
+    view: IView?,
     onSuccess: (T) -> Unit,
     onFailure: () -> Unit
 ) {
     execute(view, false, false, onSuccess, onFailure)
+}
+
+fun <T> Observable<T>.execute(onSuccess: (T) -> Unit) {
+    execute(null, true, true, onSuccess, {})
 }
 
 

@@ -18,13 +18,13 @@ object CheckHelper {
      * @return 是否验证通过
      */
     @JvmStatic
-    fun checkSignIn(account: String, pwd: String): Boolean =
+    fun checkSignIn(account: String?, pwd: String?): Boolean =
         when {
-            account.isEmpty() -> {
+            account.isNullOrEmpty() -> {
                 toast("请输入您的账号")
                 false
             }
-            pwd.isEmpty() -> {
+            pwd.isNullOrEmpty() -> {
                 toast("请输入您的密码")
                 false
             }
@@ -39,17 +39,17 @@ object CheckHelper {
      * @return 是否验证通过
      */
     @JvmStatic
-    fun checkSignUp(account: String, pwd: String, rePwd: String): Boolean =
+    fun checkSignUp(account: String?, pwd: String?, rePwd: String?): Boolean =
         when {
-            account.isEmpty() -> {
+            account.isNullOrEmpty() -> {
                 toast("请输入您的账号")
                 false
             }
-            pwd.isEmpty() -> {
+            pwd.isNullOrEmpty() -> {
                 toast("请输入您的密码")
                 false
             }
-            rePwd.isEmpty() -> {
+            rePwd.isNullOrEmpty() -> {
                 toast("请验证您输入的密码")
                 false
             }

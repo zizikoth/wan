@@ -3,6 +3,7 @@ package com.memo.login.ui.activity.login
 import android.content.Intent
 import android.support.v4.app.Fragment
 import com.alibaba.android.arouter.facade.annotation.Route
+import com.blankj.utilcode.util.ActivityUtils
 import com.flyco.tablayout.listener.OnTabSelectListener
 import com.memo.iframe.base.activity.BaseMvpActivity
 import com.memo.iframe.base.adapter.BaseFragmentPagerAdapter
@@ -92,7 +93,10 @@ class LoginActivity : BaseMvpActivity<LoginContract.View, LoginPresenter>(), Log
     /**
      * 开始进行业务操作
      */
-    override fun start() {}
+    override fun start() {
+        //除了最新的Activity关闭其他Activity
+        ActivityUtils.finishAllActivitiesExceptNewest()
+    }
 
     /**
      * 登陆
@@ -121,5 +125,17 @@ class LoginActivity : BaseMvpActivity<LoginContract.View, LoginPresenter>(), Log
      * 登陆流程失败了
      */
     override fun onFailure() {
+        if (mViewPager.currentItem == 0) {
+            mSignInFragment.finishSignIn()
+        } else {
+            mSignUpFragment.finishSignUP()
+        }
+    }
+
+    /**
+     * 点击返回键退出应用
+     */
+    override fun onBackPressed() {
+        ActivityUtils.finishAllActivities(true)
     }
 }

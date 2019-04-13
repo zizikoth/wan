@@ -3,7 +3,7 @@ package com.memo.wan.module.ui.main
 import android.content.Intent
 import android.support.v4.app.Fragment
 import com.alibaba.android.arouter.facade.annotation.Route
-import com.memo.home.ui.fragment.home.HomeFragment
+import com.memo.article.ui.fragment.article.ArticleFragment
 import com.memo.iframe.base.activity.BaseActivity
 import com.memo.iframe.tools.arouter.ARouterPath
 import com.memo.iframe.tools.ext.gone
@@ -23,13 +23,14 @@ import kotlinx.android.synthetic.main.activity_main.*
 @Route(path = ARouterPath.Main.MainActivity)
 class MainActivity : BaseActivity() {
 
-    /*** 不显示状态控件 ***/
+    override fun showTitleView(): Boolean = false
+
     override fun showStatusView(): Boolean = false
 
-    private val mHomeFragment1: Fragment by lazy { HomeFragment() }
-    private val mHomeFragment2: Fragment by lazy { HomeFragment() }
-    private val mHomeFragment3: Fragment by lazy { HomeFragment() }
-    private val mHomeFragment4: Fragment by lazy { HomeFragment() }
+    private val mHomeFragment1: Fragment by lazy { ArticleFragment() }
+    private val mHomeFragment2: Fragment by lazy { ArticleFragment() }
+    private val mHomeFragment3: Fragment by lazy { ArticleFragment() }
+    private val mHomeFragment4: Fragment by lazy { ArticleFragment() }
 
     private val fragmentHelper: FragmentHelper by lazy { FragmentHelper(R.id.mFlContainer, supportFragmentManager) }
 
@@ -65,7 +66,6 @@ class MainActivity : BaseActivity() {
     override fun initListener() {
         //底部导航监听
         mBottomView.setOnNavigationItemSelectedListener {
-            getTitleView()?.setTitle(it.title)
             when (it.itemId) {
                 R.id.id_main_home -> fragmentHelper.change(0)
                 R.id.id_main_project -> fragmentHelper.change(1)

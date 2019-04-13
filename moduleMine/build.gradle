@@ -11,7 +11,7 @@ android {
     compileSdkVersion rootProject.ext.root.compileSdkVersion
     defaultConfig {
         if (moduleMineRunAlone.toBoolean()) {
-            applicationId rootProject.ext.root.applicationId+project.getName()
+            applicationId rootProject.ext.root.applicationId + project.getName()
         }
         minSdkVersion rootProject.ext.root.minSdkVersion
         targetSdkVersion rootProject.ext.root.targetSdkVersion
@@ -39,9 +39,12 @@ kapt {
 }
 
 dependencies {
+    implementation 'com.android.support:support-v4:28.0.0'
+    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
     testImplementation rootProject.ext.testLib
     androidTestImplementation rootProject.ext.androidTestLib
     kapt rootProject.ext.routerLib
-    if(moduleMineRunAlone) implementation project(':moduleCommon')
+    if (moduleMineRunAlone) implementation project(':moduleCommon')
+    if (moduleMineRunAlone) implementation project(':moduleLogin')
     implementation project(':iFrameBase')
 }

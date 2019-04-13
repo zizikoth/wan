@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    app:srlEnableAutoLoadMore="false">
+    
+    <com.memo.iframe.widget.titleview.TitleView
+        android:id="@+id/mTitleView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:tv_left_show="false"
+        app:tv_right_icon="@drawable/ic_search"
+        app:tv_title="首页" />
+    
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
+        android:id="@+id/mRefreshLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:srlEnableAutoLoadMore="false">
+        
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/mRvList"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:overScrollMode="never" />
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+
+
+</LinearLayout>
