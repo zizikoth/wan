@@ -1,8 +1,24 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="com.memo.mine.ui.fragment.MineFragment">
+    
+    <com.memo.iframe.widget.titleview.TitleView
+        android:id="@+id/mTitleView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:tv_left_show="false"
+        app:tv_right_icon="@drawable/ic_setting" />
+    
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/mRvList"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:overScrollMode="never"
+        android:padding="@dimen/dp20" />
 
 
-</FrameLayout>
+</LinearLayout>

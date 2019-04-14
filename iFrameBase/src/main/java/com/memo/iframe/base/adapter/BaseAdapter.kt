@@ -16,6 +16,7 @@ abstract class BaseAdapter<T, K : BaseViewHolder>(layoutResId: Int) :
     BaseQuickAdapter<T, K>(layoutResId) {
 
     override fun convert(helper: K?, item: T?) {
+
         helper?.let {
             item?.let {
                 initialize(helper, item)

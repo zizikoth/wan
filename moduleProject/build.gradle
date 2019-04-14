@@ -11,7 +11,7 @@ android {
     compileSdkVersion rootProject.ext.root.compileSdkVersion
     defaultConfig {
         if (moduleProjectRunAlone.toBoolean()) {
-            applicationId rootProject.ext.root.applicationId+project.getName()
+            applicationId rootProject.ext.root.applicationId + project.getName()
         }
         minSdkVersion rootProject.ext.root.minSdkVersion
         targetSdkVersion rootProject.ext.root.targetSdkVersion
@@ -42,6 +42,8 @@ dependencies {
     testImplementation rootProject.ext.testLib
     androidTestImplementation rootProject.ext.androidTestLib
     kapt rootProject.ext.routerLib
-    if(moduleProjectRunAlone) implementation project(':moduleCommon')
+    if (moduleProjectRunAlone.toBoolean()) {
+        if (!moduleCommonRunAlone.toBoolean()) implementation project(':moduleCommon')
+    }
     implementation project(':iFrameBase')
 }

@@ -1,13 +1,13 @@
-package com.memo.navigation.launcher
+package com.memo.mine.ui.activity.favorite
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import com.memo.navigation.R
+import com.memo.mine.R
 
-class MainActivity : AppCompatActivity() {
+class FavoriteActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_favorite)
     }
 }

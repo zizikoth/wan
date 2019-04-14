@@ -1,3 +1,35 @@
 <resources>
     <string name="app_name">ModuleMine</string>
+    <string name="ClearCache">清除缓存</string>
+    <string name="PublishIssues">提供建议</string>
+    <string name="UrlIssues">https://github.com/zmemo/wan/issues</string>
+    <string name="LoginOut">退出登陆</string>
+    
+    <string name="IntroduceWanAndroid">
+        <![CDATA[
+        <h2>关于我</h2>
+          <h6>\t\t\t\t可以叫我周大侠（ memo ）  </h6>
+          <h6>\t\t\t\t努力学习中，加油吧骚年  </h6>
+          <h6>\t\t\t\t我的GitHub  </h6>
+        <h6><a href="https://github.com/zmemo" target="_blank">\t\t\t\thttps://github.com/zmemo</a></h6>
+        <h2>关于玩Android</h2>
+          <h6>\t\t\t\t本网站每天新增20~30篇优质文章，并加入到现有分类中，力求整理出一份优质而又详尽的知识体系，闲暇时间不妨上来学习下知识；除此以外，并为大家提供平时开发过程中常用的工具以及常用的网址导航。  </h6>
+          <h6>\t\t\t\t当然这只是我们目前的功能，未来我们将提供更多更加便捷的功能…  </h6>
+          <h6>\t\t\t\t如果您有任何好的建议:</h6>
+            <br/>\t\t\t\t关于网站排版
+            <br/>\t\t\t\t关于新增常用网址以及工具
+            <br/>\t\t\t\t未来你希望增加的功能等
+          <h6>\t\t\t\t可以在</h6>
+           <h6><a href="https://github.com/hongyangAndroid/wanandroid" target="_blank">\t\t\t\thttps://github.com/hongyangAndroid/xueandroid</a></h6>
+            <h6>\t\t\t\t项目中以issue的形式提出，我将及时跟进。  </h6>
+          <h6>\t\t\t\t如果您希望长期关注本站，可以加入我们的QQ群:591683946  </h6>
+        <h2>关于泓洋</h2>
+          <h6>\t\t\t\t鸿洋大神，长期在CSDN上编写高质量的博客  </h6>
+        <h6><a href="https://blog.csdn.net/lmj623565791" target="_blank">\t\t\t\thttps://blog.csdn.net/lmj623565791</a></h6>
+          <h6>  </h6>
+          <h6>\t\t\t\t每天早晨7点30分，为你推荐优秀技术博文，提升从上班路上的闲暇时间开始~  </h6>
+    ]]>
+    </string>
+
+
 </resources>

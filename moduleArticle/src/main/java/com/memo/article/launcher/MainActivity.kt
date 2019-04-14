@@ -3,11 +3,6 @@ package com.memo.article.launcher
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import com.memo.article.R
-import com.memo.article.ui.fragment.article.ArticleFragment
-import com.memo.iframe.config.api.convert
-import com.memo.iframe.config.api.execute
-import com.memo.iframe.config.controller.AppController
-import com.memo.login.config.api.LoginApi
 
 class MainActivity : AppCompatActivity() {
 
@@ -18,11 +13,11 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun start() {
-        LoginApi.signIn(AppController.account, AppController.pwd)
-            .convert().execute {
-                supportFragmentManager.beginTransaction()
-                    .add(R.id.mContainer, ArticleFragment())
-                    .commitAllowingStateLoss()
-            }
+        //        LoginApi.signIn(AppController.account, AppController.pwd)
+        //            .convert().execute {
+        //                supportFragmentManager.beginTransaction()
+        //                    .add(R.id.mContainer, ArticleFragment())
+        //                    .commitAllowingStateLoss()
+        //            }
     }
 }

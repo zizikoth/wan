@@ -2,10 +2,12 @@ package com.memo.iframe.tools.utils
 
 import android.content.Context
 import android.graphics.Color
+import com.blankj.utilcode.util.FileUtils
 import com.memo.iframe.config.constant.Constant
 import com.memo.iframe.tools.arouter.ARouterClient
 import com.memo.iframe.tools.dialog.TipDialog
 import com.scwang.smartrefresh.layout.SmartRefreshLayout
+import java.io.File
 import java.util.*
 
 /**
@@ -21,17 +23,32 @@ object CommonHelper {
 
     //------------------------------- 通用 -------------------------------//
     /**
-     * 关闭刷新
+     * 设置文件夹的一个合适的大小
      */
     @JvmStatic
-    fun finishRefresh(refreshLayout: SmartRefreshLayout?) {
-        refreshLayout?.let {
-            if (it.isRefreshing) {
-                it.finishRefresh(400)
+    fun convertDirSize(vararg dirs: File?): String {
+        var byteNum = 0L
+        for (dir in dirs) {
+            dir?.let {
+                byteNum += FileUtils.getDirLength(dir)
             }
-            if (it.isLoading) {
-                it.finishLoadMore(400)
-            }
+        }
+        return when {
+            byteNum < 1048576 -> String.format(
+                Locale.getDefault(),
+                "%.0fKB",
+                byteNum.toDouble() / 1024
+            )
+            byteNum < 1073741824 -> String.format(
+                Locale.getDefault(),
+                "%.0fMB",
+                byteNum.toDouble() / 1048576
+            )
+            else -> String.format(
+                Locale.getDefault(),
+                "%.0fGB",
+                byteNum.toDouble() / 1073741824
+            )
         }
     }
 
@@ -50,6 +67,25 @@ object CommonHelper {
     }
 
 
+    /**
+     * 关闭刷新
+     */
+    @JvmStatic
+    fun finishRefresh(refreshLayout: SmartRefreshLayout?) {
+        refreshLayout?.let {
+            if (it.isRefreshing) {
+                it.finishRefresh(400)
+            }
+            if (it.isLoading) {
+                it.finishLoadMore(400)
+            }
+        }
+    }
+
+
+    /**
+     * 判断是否登陆
+     */
     @JvmStatic
     fun isSignIn(context: Context): Boolean {
         return if (Constant.cookie.isNotEmpty()) {

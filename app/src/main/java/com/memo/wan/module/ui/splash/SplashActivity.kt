@@ -5,7 +5,7 @@ import com.blankj.utilcode.util.BarUtils
 import com.memo.iframe.base.activity.BaseActivity
 import com.memo.iframe.config.constant.Constant
 import com.memo.iframe.tools.arouter.ARouterClient
-import com.memo.iframe.tools.ext.SP
+import com.memo.iframe.tools.ext.sp
 import com.memo.iframe.tools.handler.WeakHandler
 
 /**
@@ -52,7 +52,7 @@ class SplashActivity : BaseActivity() {
      * 开始进行业务操作
      */
     override fun start() {
-        val cookie = SP().getString(Constant.SharedPreferences.COOKIE, "")
+        val cookie = sp().getString(Constant.SharedPreferences.COOKIE, "")
         if (cookie.isNullOrEmpty()) {
             mHandler.sendEmptyMessageDelayed(WHAT_LOGIN, 1000)
         } else {

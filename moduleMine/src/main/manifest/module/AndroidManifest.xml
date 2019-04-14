@@ -3,8 +3,15 @@
           package="com.memo.mine">
 
     <application>
-        <activity android:name=".launcher.MainActivity"
-                  android:screenOrientation="portrait"/>
+        <activity
+            android:name=".ui.activity.history.HistoryActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.favorite.FavoriteActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.todo.TodoActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.activity.setting.SettingActivity"
             android:screenOrientation="portrait" />

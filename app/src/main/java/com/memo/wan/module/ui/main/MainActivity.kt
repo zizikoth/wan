@@ -10,6 +10,7 @@ import com.memo.iframe.tools.ext.gone
 import com.memo.iframe.tools.utils.ClickHelper
 import com.memo.iframe.tools.utils.FragmentHelper
 import com.memo.iframe.tools.utils.cancelToast
+import com.memo.mine.ui.fragment.MineFragment
 import com.memo.wan.R
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -30,9 +31,14 @@ class MainActivity : BaseActivity() {
     private val mHomeFragment1: Fragment by lazy { ArticleFragment() }
     private val mHomeFragment2: Fragment by lazy { ArticleFragment() }
     private val mHomeFragment3: Fragment by lazy { ArticleFragment() }
-    private val mHomeFragment4: Fragment by lazy { ArticleFragment() }
+    private val mHomeFragment4: Fragment by lazy { MineFragment() }
 
-    private val fragmentHelper: FragmentHelper by lazy { FragmentHelper(R.id.mFlContainer, supportFragmentManager) }
+    private val fragmentHelper: FragmentHelper by lazy {
+        FragmentHelper(
+            R.id.mFlContainer,
+            supportFragmentManager
+        )
+    }
 
     override fun bindLayoutResId(): Int = R.layout.activity_main
 

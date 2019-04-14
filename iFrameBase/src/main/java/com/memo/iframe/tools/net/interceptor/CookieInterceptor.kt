@@ -2,8 +2,8 @@ package com.memo.iframe.tools.net.interceptor
 
 import com.blankj.utilcode.util.LogUtils
 import com.memo.iframe.config.constant.Constant
-import com.memo.iframe.tools.ext.SP
 import com.memo.iframe.tools.ext.put
+import com.memo.iframe.tools.ext.sp
 import okhttp3.Interceptor
 import okhttp3.Response
 
@@ -32,7 +32,7 @@ class CookieInterceptor : Interceptor {
             //获取cookie
             Constant.cookie = encodeCookie(cookies)
             //存入本地
-            SP().put(Constant.SharedPreferences.COOKIE, Constant.cookie)
+            sp().put(Constant.SharedPreferences.COOKIE, Constant.cookie)
             logBuilder.append("\ncookies = ${Constant.cookie}")
         }
         LogUtils.iTag("Http", logBuilder)

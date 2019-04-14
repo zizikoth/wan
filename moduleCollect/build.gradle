@@ -42,7 +42,9 @@ dependencies {
     testImplementation rootProject.ext.testLib
     androidTestImplementation rootProject.ext.androidTestLib
     kapt rootProject.ext.routerLib
-    if (moduleCollectRunAlone) implementation project(':moduleCommon')
-    if (moduleCollectRunAlone) implementation project(':moduleLogin')
+    if (moduleCollectRunAlone.toBoolean()) {
+        if (!moduleCommonRunAlone.toBoolean()) implementation project(':moduleCommon')
+        if (!moduleLoginRunAlone.toBoolean()) implementation project(':moduleLogin')
+    }
     implementation project(':iFrameBase')
 }

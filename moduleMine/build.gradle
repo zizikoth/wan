@@ -39,12 +39,14 @@ kapt {
 }
 
 dependencies {
-    implementation 'com.android.support:support-v4:28.0.0'
     implementation 'com.android.support.constraint:constraint-layout:1.1.3'
     testImplementation rootProject.ext.testLib
     androidTestImplementation rootProject.ext.androidTestLib
     kapt rootProject.ext.routerLib
-    if (moduleMineRunAlone) implementation project(':moduleCommon')
-    if (moduleMineRunAlone) implementation project(':moduleLogin')
+    if (moduleMineRunAlone.toBoolean()) {
+        if (!moduleCommonRunAlone.toBoolean()) implementation project(':moduleCommon')
+        if (!moduleLoginRunAlone.toBoolean()) implementation project(':moduleLogin')
+        if (!moduleCollectRunAlone.toBoolean()) implementation project(':moduleCollect')
+    }
     implementation project(':iFrameBase')
 }

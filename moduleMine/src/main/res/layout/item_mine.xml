@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    
+    <android.support.v7.widget.CardView
+        android:id="@+id/mCvItem"
+        android:layout_width="@dimen/dp120"
+        android:layout_height="@dimen/dp120"
+        android:layout_gravity="center"
+        android:layout_margin="@dimen/dp20"
+        android:foreground="?selectableItemBackgroundBorderless"
+        app:cardCornerRadius="@dimen/dp10">
+        
+        <TextView
+            android:id="@+id/mTvItem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:drawablePadding="@dimen/dp15"
+            android:gravity="center"
+            android:textColor="@color/color_333333"
+            android:textStyle="bold"
+            tools:drawableTop="@drawable/ic_mine_about"
+            tools:text="About" />
+    
+    </android.support.v7.widget.CardView>
+
+
+</FrameLayout>
