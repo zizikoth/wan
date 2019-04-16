@@ -4,7 +4,6 @@ package com.memo.article.ui.fragment.article
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.view.View
-import com.alibaba.android.arouter.facade.annotation.Route
 import com.memo.article.R
 import com.memo.article.config.entity.ArticleData
 import com.memo.article.config.entity.MainBanner
@@ -13,7 +12,6 @@ import com.memo.article.ui.activity.search.SearchActivity
 import com.memo.article.ui.adapter.ArticleAdapter
 import com.memo.iframe.base.fragment.BaseMvpFragment
 import com.memo.iframe.tools.arouter.ARouterClient
-import com.memo.iframe.tools.arouter.ARouterPath
 import com.memo.iframe.tools.banner.BannerImageLoader
 import com.memo.iframe.tools.ext.inflaterView
 import com.memo.iframe.tools.ext.startActivity
@@ -31,7 +29,6 @@ import kotlinx.android.synthetic.main.header_layout_article.view.*
  * @author zhou
  * @date 2019-02-27 16:10
  */
-@Route(path = ARouterPath.Article.ArticleFragment)
 class ArticleFragment : BaseMvpFragment<ArticleContract.View, ArticlePresenter>(),
     ArticleContract.View {
 
@@ -99,7 +96,7 @@ class ArticleFragment : BaseMvpFragment<ArticleContract.View, ArticlePresenter>(
         })
 
         //列表的点击事件
-        mAdapter.setOnItemClickListener { _, _, position ->
+        mAdapter.addOnItemClickListener { _, position ->
             val articleData: ArticleData = mAdapter.data[position]
             ARouterClient.startAgentWeb(articleData.title, articleData.link)
         }
@@ -154,7 +151,7 @@ class ArticleFragment : BaseMvpFragment<ArticleContract.View, ArticlePresenter>(
      * 获取数据失败
      */
     override fun onFailureData() {
-        page--
+        page = CommonHelper.reducePage(page)
         CommonHelper.finishRefresh(mRefreshLayout)
     }
 

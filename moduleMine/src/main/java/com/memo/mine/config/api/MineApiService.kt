@@ -23,4 +23,6 @@ interface MineApiService {
      */
     @GET("user/logout/json")
     fun loginOut(): Observable<BaseResponse<EmptyResponse>>
+
+
 }

@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    app:srlEnableAutoLoadMore="false">
+    android:descendantFocusability="blocksDescendants">
     
     <com.memo.iframe.widget.titleview.TitleView
         android:id="@+id/mTitleView"

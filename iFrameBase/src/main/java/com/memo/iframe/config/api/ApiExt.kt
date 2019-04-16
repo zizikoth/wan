@@ -2,6 +2,7 @@ package com.memo.iframe.config.api
 
 import com.memo.iframe.base.mvp.IView
 import com.memo.iframe.config.entity.BaseResponse
+import com.memo.iframe.config.entity.EmptyResponse
 import com.memo.iframe.tools.arouter.ARouterClient
 import com.memo.iframe.tools.utils.RxSchedulersHelper
 import io.reactivex.Observable
@@ -36,6 +37,17 @@ fun <T> Observable<BaseResponse<T>>.convert(): Observable<T> =
         }
     }
 
+fun Observable<BaseResponse<EmptyResponse>>.convertEmpty(): Observable<EmptyResponse> =
+    this.flatMap {
+        when (it.errorCode) {
+            //请求成功
+            ApiErrorCode.SUCCESS -> Observable.just(EmptyResponse())
+            //Token失效 重新登陆
+            ApiErrorCode.TOKEN_UN_LOGIN -> Observable.error(ApiException(it.errorCode, it.errorMsg))
+            //服务器异常
+            else -> Observable.error(ApiException(it.errorCode, it.errorMsg))
+        }
+    }
 
 fun <T> Observable<T>.execute(
     view: IView?,
@@ -54,8 +66,8 @@ fun <T> Observable<T>.execute(
             }
 
             override fun onNext(response: T) {
-                onSuccess(response)
                 view?.hideAll()
+                onSuccess(response)
             }
 
             override fun onError(exception: Throwable) {
@@ -101,41 +113,15 @@ fun <T> Observable<T>.execute(
 fun <T> Observable<T>.execute(
     view: IView?,
     isFirstLoad: Boolean,
-    onSuccess: (T) -> Unit,
-    onFailure: () -> Unit
-) {
-    execute(view, isFirstLoad, true, onSuccess, onFailure)
-}
-
-fun <T> Observable<T>.execute(
-    view: IView?,
-    isFirstLoad: Boolean,
-    onSuccess: (T) -> Unit
-) {
-    execute(view, isFirstLoad, true, onSuccess, {})
-}
-
-
-fun <T> Observable<T>.execute(
-    view: IView?,
-    isFirstLoad: Boolean = false,
-    isShowLoading: Boolean = true,
+    isShowLoading: Boolean,
     onSuccess: (T) -> Unit
 ) {
     execute(view, isFirstLoad, isShowLoading, onSuccess, {})
 }
 
+
 fun <T> Observable<T>.execute(
-    view: IView?,
-    onSuccess: (T) -> Unit,
-    onFailure: () -> Unit
+    onSuccess: (T) -> Unit
 ) {
-    execute(view, false, false, onSuccess, onFailure)
+    execute(null, false, false, onSuccess, {})
 }
-
-fun <T> Observable<T>.execute(onSuccess: (T) -> Unit) {
-    execute(null, true, true, onSuccess, {})
-}
-
-
-

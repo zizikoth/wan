@@ -46,10 +46,7 @@ dependencies {
     kapt rootProject.ext.routerLib
     if (!moduleCommonRunAlone.toBoolean()) implementation project(':moduleCommon')
     if (!moduleArticleRunAlone.toBoolean()) implementation project(':moduleArticle')
-    if (!moduleNavigationRunAlone.toBoolean()) implementation project(':moduleNavigation')
-    if (!moduleProjectRunAlone.toBoolean()) implementation project(':moduleProject')
     if (!moduleMineRunAlone.toBoolean()) implementation project(':moduleMine')
     if (!moduleLoginRunAlone.toBoolean()) implementation project(':moduleLogin')
-    if (!moduleCollectRunAlone.toBoolean()) implementation project(':moduleCollect')
     implementation project(':iFrameBase')
 }

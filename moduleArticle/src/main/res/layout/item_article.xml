@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.ruffian.library.widget.RFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="@dimen/dp15"
+    android:layout_marginTop="@dimen/dp8"
+    android:layout_marginEnd="@dimen/dp15"
+    android:layout_marginBottom="@dimen/dp8"
+    app:background_normal="@color/white">
+    
+    <com.memo.iframe.widget.textview.SlantedTextView
+        android:layout_width="@dimen/dp80"
+        android:layout_height="@dimen/dp80"
+        app:slantedBackgroundColor="@color/color_main"
+        app:slantedMode="left"
+        app:slantedTextColor="@color/white"
+        app:slantedTextSize="@dimen/sp12"
+        tools:slantedText="aaa" />
+    
+    <com.ruffian.library.widget.RTextView
+        android:id="@+id/mTvTop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:layout_marginTop="@dimen/dp10"
+        android:layout_marginEnd="@dimen/dp10"
+        android:paddingLeft="@dimen/dp8"
+        android:paddingTop="@dimen/dp4"
+        android:paddingRight="@dimen/dp8"
+        android:paddingBottom="@dimen/dp4"
+        android:text="置顶"
+        android:textColor="@color/color_EB4310"
+        app:border_color_normal="@color/color_EB4310"
+        app:border_width_normal="@dimen/dp1"
+        app:corner_radius="@dimen/dp3" />
+
+
+</com.ruffian.library.widget.RFrameLayout>

@@ -21,28 +21,28 @@ import kotlinx.android.synthetic.main.status_view.view.*
  */
 class StatusView(context: Context, attrs: AttributeSet?) : FrameLayout(context, attrs) {
 
-    private val ANIM_STATUS_LOADING = 0
-    private val ANIM_STATUS_ALL = 1
+    private val STATUS_HIDE_LOAD = 1
+    private val STATUS_HIDE_ALL = 2
 
-    private var status = 0
-
-    private val mAlphaAnim by lazy {
-        val alphaAnimation = AlphaAnimation(1f, 0f)
-        alphaAnimation.duration = 300
-        alphaAnimation
-    }
+    private var hideStatus = STATUS_HIDE_LOAD
 
     private var mRetryListener: OnRetryClickListener? = null
 
+    private val mAlphaAnim by lazy {
+        val alpha = AlphaAnimation(1f, 0f)
+        alpha.duration = 300
+        alpha
+    }
+
     init {
         inflaterView(R.layout.status_view, this)
-        setBackgroundColor(Color.WHITE)
+        setBackgroundColor(color(R.color.color_F5F5F5))
         mStatusError.onClick { retry() }
         mAlphaAnim.setAnimationListener(object : SimpleAnimationListener() {
             override fun onAnimationEnd(animation: Animation?) {
-                when (status) {
-                    ANIM_STATUS_LOADING -> mStatusLoading.gone()
-                    ANIM_STATUS_ALL -> hide()
+                when (hideStatus) {
+                    STATUS_HIDE_ALL -> hide()
+                    STATUS_HIDE_LOAD -> mStatusLoading.gone()
                 }
             }
         })
@@ -61,7 +61,7 @@ class StatusView(context: Context, attrs: AttributeSet?) : FrameLayout(context, 
      * 显示数据异常
      */
     fun showDataError() {
-        status = ANIM_STATUS_LOADING
+        hideStatus = STATUS_HIDE_LOAD
         mStatusLoading.startAnimation(mAlphaAnim)
         mStatusError.visible()
         mTvStatusError.setCompoundDrawablesWithIntrinsicBounds(
@@ -79,7 +79,7 @@ class StatusView(context: Context, attrs: AttributeSet?) : FrameLayout(context, 
      */
     @SuppressLint("SetTextI18n")
     fun showServerError() {
-        status = ANIM_STATUS_LOADING
+        hideStatus = STATUS_HIDE_LOAD
         mStatusLoading.startAnimation(mAlphaAnim)
         mStatusError.visible()
         mTvStatusError.setCompoundDrawablesWithIntrinsicBounds(
@@ -96,7 +96,7 @@ class StatusView(context: Context, attrs: AttributeSet?) : FrameLayout(context, 
      * 显示网络异常
      */
     fun showNetError() {
-        status = ANIM_STATUS_LOADING
+        hideStatus = STATUS_HIDE_LOAD
         mStatusLoading.startAnimation(mAlphaAnim)
         mStatusError.visible()
         mTvStatusError.setCompoundDrawablesWithIntrinsicBounds(
@@ -113,7 +113,7 @@ class StatusView(context: Context, attrs: AttributeSet?) : FrameLayout(context, 
      * 隐藏全部
      */
     fun hideAll() {
-        status = ANIM_STATUS_ALL
+        hideStatus = STATUS_HIDE_ALL
         startAnimation(mAlphaAnim)
     }
 

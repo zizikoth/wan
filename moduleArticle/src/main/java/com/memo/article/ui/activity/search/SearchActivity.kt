@@ -62,7 +62,7 @@ class SearchActivity : BaseMvpActivity<SearchContract.View, SearchPresenter>(),
             }
         }
         //热词搜索
-        mAdapter.setOnItemClickListener { _, _, position ->
+        mAdapter.addOnItemClickListener { _, position ->
             SearchResultActivity.start(mContext, mAdapter.data[position].name)
         }
     }

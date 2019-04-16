@@ -21,6 +21,7 @@ data class Article(
     var total: Int = 0 // 6085
 )
 
+
 data class ArticleData(
     var apkLink: String = "",
     var author: String = "", // MeandNi
@@ -81,3 +82,25 @@ data class MainData(
 data class HotKeyword(
     var name: String = "" // 逆向 加固
 )
+
+data class Project(
+    var courseId: Int = 0, // 13
+    var id: Int = 0, // 294
+    var name: String = "", // 完整项目
+    var order: Int = 0, // 145000
+    var parentChapterId: Int = 0, // 293
+    var userControlSetTop: Boolean = false, // false
+    var visible: Int = 0 // 0
+)
+
+data class Tree(
+    var children: List<Project> = listOf(),
+    var courseId: Int = 0, // 13
+    var id: Int = 0, // 439
+    var name: String = "", // 问答
+    var order: Int = 0, // 200
+    var parentChapterId: Int = 0, // 0
+    var userControlSetTop: Boolean = false, // false
+    var visible: Int = 0 // 1
+)
+

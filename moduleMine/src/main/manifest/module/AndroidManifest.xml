@@ -1,13 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.memo.mine">
-
+    package="com.memo.mine">
+    
     <application>
         <activity
             android:name=".ui.activity.history.HistoryActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".ui.activity.favorite.FavoriteActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.activity.todo.TodoActivity"

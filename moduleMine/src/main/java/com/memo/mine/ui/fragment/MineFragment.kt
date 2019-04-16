@@ -2,14 +2,16 @@ package com.memo.mine.ui.fragment
 
 
 import android.os.Bundle
-import android.support.v7.widget.GridLayoutManager
+import android.support.v7.widget.LinearLayoutManager
 import com.memo.iframe.base.fragment.BaseFragment
+import com.memo.iframe.config.constant.Constant
+import com.memo.iframe.tools.arouter.ARouterClient
+import com.memo.iframe.tools.ext.sp
 import com.memo.iframe.tools.ext.startActivity
+import com.memo.iframe.tools.ext.string
 import com.memo.mine.R
 import com.memo.mine.config.entity.MineData
 import com.memo.mine.ui.activity.about.AboutActivity
-import com.memo.mine.ui.activity.favorite.FavoriteActivity
-import com.memo.mine.ui.activity.history.HistoryActivity
 import com.memo.mine.ui.activity.setting.SettingActivity
 import com.memo.mine.ui.activity.todo.TodoActivity
 import com.memo.mine.ui.adapter.MineAdapter
@@ -46,7 +48,7 @@ class MineFragment : BaseFragment() {
      */
     override fun initData(bundle: Bundle?) {
         mData.apply {
-            add(MineData(R.drawable.ic_mine_collect, Favorite))
+            add(MineData(R.drawable.ic_mine_favorite, Favorite))
             add(MineData(R.drawable.ic_mine_todo, Todo))
             add(MineData(R.drawable.ic_mine_history, History))
             add(MineData(R.drawable.ic_mine_about, About))
@@ -58,8 +60,10 @@ class MineFragment : BaseFragment() {
      */
     override fun initView() {
         mTitleView.setTitle("我的")
+        mTvName.text =
+            sp().getString(Constant.SharedPreferences.USERNAME, string(R.string.UnKnowName))
         mRvList.run {
-            layoutManager = GridLayoutManager(mActivity, 2)
+            layoutManager = LinearLayoutManager(mActivity)
             mAdapter.setNewData(mData)
             adapter = mAdapter
         }
@@ -74,11 +78,11 @@ class MineFragment : BaseFragment() {
             startActivity<SettingActivity>()
         }
         // 模块点击
-        mAdapter.setOnItemChildClickListener { _, _, position ->
+        mAdapter.addOnItemChildClickListener { _, position ->
             when (mAdapter.data[position].title) {
                 //我的收藏
                 Favorite -> {
-                    startActivity<FavoriteActivity>()
+                    ARouterClient.startFavorite()
                 }
                 // To Do
                 Todo -> {
@@ -86,7 +90,7 @@ class MineFragment : BaseFragment() {
                 }
                 //浏览历史
                 History -> {
-                    startActivity<HistoryActivity>()
+                    //startActivity<HistoryActivity>()
                 }
                 //关于我们
                 About -> {

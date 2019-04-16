@@ -21,8 +21,10 @@ class SettingPresenter : BasePresenter<SettingModel, SettingContract.View>(),
      * 退出登陆
      */
     override fun loginOut() {
-        mModel.loginOut().execute(mView) {
+        mModel.loginOut().execute(mView, false, false, {
             mView.onLoginOutSuccess()
-        }
+        }, {
+            mView.onLoginOutFailure()
+        })
     }
 }

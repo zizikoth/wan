@@ -1,6 +1,8 @@
 package com.memo.login.ui.activity.login
 
 import com.memo.iframe.config.api.convert
+import com.memo.iframe.config.api.convertEmpty
+import com.memo.iframe.config.entity.EmptyResponse
 import com.memo.login.config.api.LoginApi
 import com.memo.login.config.entity.UserInfo
 import io.reactivex.Observable
@@ -22,7 +24,7 @@ class LoginModel : LoginContract.Model {
     /**
      * 注册
      */
-    override fun signUp(account: String, pwd: String, rePwd: String): Observable<Any> =
-        LoginApi.signUp(account, pwd, rePwd).convert()
+    override fun signUp(account: String, pwd: String, rePwd: String): Observable<EmptyResponse> =
+        LoginApi.signUp(account, pwd, rePwd).convertEmpty()
 
 }

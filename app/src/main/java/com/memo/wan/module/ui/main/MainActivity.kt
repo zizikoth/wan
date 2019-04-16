@@ -4,6 +4,8 @@ import android.content.Intent
 import android.support.v4.app.Fragment
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.memo.article.ui.fragment.article.ArticleFragment
+import com.memo.article.ui.fragment.navi.NaviFragment
+import com.memo.article.ui.fragment.project.tree.ProjectFragment
 import com.memo.iframe.base.activity.BaseActivity
 import com.memo.iframe.tools.arouter.ARouterPath
 import com.memo.iframe.tools.ext.gone
@@ -29,8 +31,8 @@ class MainActivity : BaseActivity() {
     override fun showStatusView(): Boolean = false
 
     private val mHomeFragment1: Fragment by lazy { ArticleFragment() }
-    private val mHomeFragment2: Fragment by lazy { ArticleFragment() }
-    private val mHomeFragment3: Fragment by lazy { ArticleFragment() }
+    private val mHomeFragment2: Fragment by lazy { ProjectFragment() }
+    private val mHomeFragment3: Fragment by lazy { NaviFragment() }
     private val mHomeFragment4: Fragment by lazy { MineFragment() }
 
     private val fragmentHelper: FragmentHelper by lazy {

@@ -13,12 +13,56 @@
         app:tv_left_show="false"
         app:tv_right_icon="@drawable/ic_setting" />
     
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/mRvList"
+    <android.support.v7.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:overScrollMode="never"
-        android:padding="@dimen/dp20" />
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp10"
+        android:layout_marginTop="@dimen/dp10"
+        android:layout_marginEnd="@dimen/dp10"
+        app:cardCornerRadius="@dimen/dp10"
+        app:cardElevation="0dp">
+        
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="@dimen/dp15">
+            
+            <com.ruffian.library.widget.RImageView
+                android:layout_width="@dimen/dp60"
+                android:layout_height="@dimen/dp60"
+                android:src="@drawable/ic_head"
+                app:border_color="@color/color_F5F5F5"
+                app:border_width="@dimen/dp1"
+                app:is_circle="true" />
+            
+            <TextView
+                android:id="@+id/mTvName"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/dp15"
+                android:text="@string/UnKnowName"
+                android:textColor="@color/color_333333"
+                android:textStyle="bold"
+                tools:textSize="@dimen/sp16" />
+        
+        </LinearLayout>
+    
+    </android.support.v7.widget.CardView>
+    
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/dp10"
+        app:cardCornerRadius="@dimen/dp10"
+        app:cardElevation="0dp">
+        
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/mRvList"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:overScrollMode="never" />
+    </android.support.v7.widget.CardView>
 
 
 </LinearLayout>

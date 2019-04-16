@@ -35,7 +35,7 @@ class ArticlePresenter : BasePresenter<ArticleModel, ArticleContract.View>(),
      * @param page 页码
      */
     override fun getMainArticle(page: Int) {
-        mModel.getMainArticle(page).execute(mView, {
+        mModel.getMainArticle(page).execute(mView, false, false, {
             mView.onSuccessMainData(MainData(it))
         }, { mView.onFailureData() })
     }

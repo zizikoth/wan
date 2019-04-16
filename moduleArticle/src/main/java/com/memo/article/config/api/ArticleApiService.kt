@@ -1,11 +1,9 @@
 package com.memo.article.config.api
 
-import com.memo.article.config.entity.Article
-import com.memo.article.config.entity.ArticleData
-import com.memo.article.config.entity.HotKeyword
-import com.memo.article.config.entity.MainBanner
+import com.memo.article.config.entity.*
 import com.memo.iframe.config.api.ApiClient
 import com.memo.iframe.config.entity.BaseResponse
+import com.memo.iframe.config.entity.EmptyResponse
 import io.reactivex.Observable
 import retrofit2.http.GET
 import retrofit2.http.POST
@@ -23,7 +21,7 @@ import retrofit2.http.Query
 /**
  * 创建API
  */
-val ArticleApi: ArticleApiService by lazy { ApiClient.create(ArticleApiService::class.java) }
+val mArticleApi: ArticleApiService by lazy { ApiClient.create(ArticleApiService::class.java) }
 
 /**
  * API接口
@@ -42,6 +40,49 @@ interface ArticleApiService {
      */
     @GET("article/list/{page}/json")
     fun getMainArticles(@Path("page") page: Int): Observable<BaseResponse<Article>>
+
+    /**
+     * 收藏文章
+     */
+    @POST("lg/collect/{id}/json")
+    fun addFavoriteArticle(@Path("id") id: String): Observable<BaseResponse<EmptyResponse>>
+
+    /**
+     * 获取体系树
+     */
+    @GET("tree/json")
+    fun getNaviTree(): Observable<BaseResponse<ArrayList<Tree>>>
+
+    /**
+     * 获取体系下的文章
+     */
+    @GET("article/list/{page}/json")
+    fun getNaviArticles(
+        @Path("page") page: Int,
+        @Query("cid") cid: String
+    ): Observable<BaseResponse<Article>>
+
+    /**
+     * 获取项目体系
+     */
+    @GET("project/tree/json")
+    fun getProjectTree(): Observable<BaseResponse<ArrayList<Project>>>
+
+    /**
+     * 获取项目下的文章
+     */
+    @GET("project/list/{page}/json")
+    fun getProjectArticles(
+        @Path("page") page: Int,
+        @Query("cid") cid: String
+    ): Observable<BaseResponse<Article>>
+
+    /**
+     * 获取我的收藏
+     * @param page 页码
+     */
+    @GET("lg/collect/list/{page}/json")
+    fun getCollection(@Path("page") page: Int): Observable<BaseResponse<Article>>
 
     /**
      * 获取主页轮播图

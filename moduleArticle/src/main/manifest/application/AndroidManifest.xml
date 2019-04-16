@@ -29,6 +29,9 @@
         <activity
             android:name=".ui.activity.result.SearchResultActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.favorite.FavoriteActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

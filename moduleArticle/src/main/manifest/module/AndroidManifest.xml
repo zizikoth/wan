@@ -5,10 +5,16 @@
     
     <application tools:ignore="AllowBackup,GoogleAppIndexingWarning,MissingApplicationIcon">
         <activity
+            android:name=".ui.activity.tree.TreeArticleActivity"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".ui.activity.search.SearchActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.activity.result.SearchResultActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.favorite.FavoriteActivity"
             android:screenOrientation="portrait" />
     </application>
 

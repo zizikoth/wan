@@ -15,11 +15,22 @@ import io.reactivex.Observable
 interface SettingContract {
 
     interface Model : IModel {
+        /**
+         * 登出
+         */
         fun loginOut(): Observable<EmptyResponse>
     }
 
     interface View : IView {
+        /**
+         * 登出成功
+         */
         fun onLoginOutSuccess()
+
+        /**
+         * 登出失败
+         */
+        fun onLoginOutFailure()
     }
 
     interface Presenter {

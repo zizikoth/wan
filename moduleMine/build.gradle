@@ -46,7 +46,7 @@ dependencies {
     if (moduleMineRunAlone.toBoolean()) {
         if (!moduleCommonRunAlone.toBoolean()) implementation project(':moduleCommon')
         if (!moduleLoginRunAlone.toBoolean()) implementation project(':moduleLogin')
-        if (!moduleCollectRunAlone.toBoolean()) implementation project(':moduleCollect')
+        if (!moduleArticleRunAlone.toBoolean()) implementation project(':moduleArticle')
     }
     implementation project(':iFrameBase')
 }

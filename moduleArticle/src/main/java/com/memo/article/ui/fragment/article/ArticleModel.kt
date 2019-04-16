@@ -1,6 +1,6 @@
 package com.memo.article.ui.fragment.article
 
-import com.memo.article.config.api.ArticleApi
+import com.memo.article.config.api.mArticleApi
 import com.memo.article.config.entity.Article
 import com.memo.article.config.entity.ArticleData
 import com.memo.article.config.entity.MainBanner
@@ -23,7 +23,7 @@ class ArticleModel : ArticleContract.Model {
      * @param page 页码
      */
     override fun getMainArticle(page: Int): Observable<Article> =
-        ArticleApi.getMainArticles(page).convert()
+        mArticleApi.getMainArticles(page).convert()
 
 
     /**
@@ -31,9 +31,9 @@ class ArticleModel : ArticleContract.Model {
      * @param page 页码
      */
     override fun getMainData(page: Int): Observable<MainData> {
-        val topArticle = ArticleApi.getTopArticles().convert()
-        val articles = ArticleApi.getMainArticles(page).convert()
-        val banners = ArticleApi.getMainBanner().convert()
+        val topArticle = mArticleApi.getTopArticles().convert()
+        val articles = mArticleApi.getMainArticles(page).convert()
+        val banners = mArticleApi.getMainBanner().convert()
 
         return Observable.zip(topArticle, articles, banners,
             Function3<ArrayList<ArticleData>, Article, ArrayList<MainBanner>, MainData> { top, article, banner ->

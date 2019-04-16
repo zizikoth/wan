@@ -4,6 +4,7 @@
     <string name="PublishIssues">提供建议</string>
     <string name="UrlIssues">https://github.com/zmemo/wan/issues</string>
     <string name="LoginOut">退出登陆</string>
+    <string name="UnKnowName">WHAT\'S YOUR NAME</string>
     
     <string name="IntroduceWanAndroid">
         <![CDATA[

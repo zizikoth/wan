@@ -17,11 +17,11 @@ import com.memo.mine.config.entity.MineData
 class MineAdapter : BaseAdapter<MineData, BaseViewHolder>(R.layout.item_mine) {
 
     override fun initialize(helper: BaseViewHolder, item: MineData) {
-        helper.addOnClickListener(R.id.mCvItem)
+        helper.addOnClickListener(R.id.mTvItem)
         val mTvItem = helper.getView<TextView>(R.id.mTvItem)
         mTvItem.setCompoundDrawablesWithIntrinsicBounds(
-            null,
             helper.itemView.drawable(item.iconRes),
+            null,
             null,
             null
         )

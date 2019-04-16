@@ -41,12 +41,13 @@ object ARouterClient {
 
 
     /**
-     * Collect - 收藏界面
+     * Article - 收藏界面
      */
     @JvmStatic
-    fun startCollect() {
-        ARouter.getInstance().build(ARouterPath.Collect.CollectActivity)
+    fun startFavorite() {
+        ARouter.getInstance().build(ARouterPath.Article.FavoriteActivity)
             .navigation()
     }
+
 
 }

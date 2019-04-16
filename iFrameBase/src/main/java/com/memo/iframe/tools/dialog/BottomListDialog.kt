@@ -9,6 +9,7 @@ import com.chad.library.adapter.base.BaseViewHolder
 import com.memo.iframe.R
 import com.memo.iframe.base.adapter.BaseAdapter
 import com.memo.iframe.tools.ext.onClick
+import com.memo.iframe.tools.utils.ClickHelper
 import kotlinx.android.synthetic.main.dialog_bottom_list.view.*
 import razerdp.basepopup.BasePopupWindow
 
@@ -139,12 +140,15 @@ class BottomListDialog constructor(context: Context, data: ArrayList<String> = a
      * 设置点击监听
      */
     fun setOnItemClickListener(method: (position: Int, item: String) -> Unit): BottomListDialog {
+
         mListener = object : OnItemClickListener {
             /**
              * 条目点击
              */
             override fun onItemClick(position: Int, item: String) {
-                method(position, item)
+                if (ClickHelper.isNotFastClick) {
+                    method(position, item)
+                }
             }
         }
         return this

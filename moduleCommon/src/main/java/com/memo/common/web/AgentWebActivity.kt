@@ -4,6 +4,7 @@ import android.content.Intent
 import android.text.Html
 import android.view.ViewGroup
 import com.alibaba.android.arouter.facade.annotation.Route
+import com.blankj.utilcode.util.LogUtils
 import com.just.agentweb.AgentWeb
 import com.memo.common.R
 import com.memo.iframe.base.activity.BaseActivity
@@ -42,6 +43,7 @@ class AgentWebActivity : BaseActivity() {
     override fun initData(intent: Intent) {
         url = intent.getStringExtra("url")
         title = intent.getStringExtra("title")
+        LogUtils.iTag("AgentWeb", "url = $url \ntitle = $title")
     }
 
     /**

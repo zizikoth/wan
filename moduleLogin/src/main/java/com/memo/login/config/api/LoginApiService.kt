@@ -2,6 +2,7 @@ package com.memo.login.config.api
 
 import com.memo.iframe.config.api.ApiClient
 import com.memo.iframe.config.entity.BaseResponse
+import com.memo.iframe.config.entity.EmptyResponse
 import com.memo.login.config.entity.UserInfo
 import io.reactivex.Observable
 import retrofit2.http.POST
@@ -30,7 +31,7 @@ interface LoginApiService {
         @Query("username") account: String,
         @Query("password") pwd: String,
         @Query("repassword") rePwd: String
-    ): Observable<BaseResponse<Any>>
+    ): Observable<BaseResponse<EmptyResponse>>
 
     /**
      * 登陆

@@ -31,5 +31,6 @@ class Constant {
     /*** sp存储常量 ***/
     object SharedPreferences {
         const val COOKIE: String = "COOKIE"
+        const val USERNAME: String = "USERNAME"
     }
 }

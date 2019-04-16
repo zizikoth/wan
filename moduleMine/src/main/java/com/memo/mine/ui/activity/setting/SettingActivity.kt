@@ -6,10 +6,7 @@ import com.blankj.utilcode.util.FileUtils
 import com.memo.iframe.base.activity.BaseMvpActivity
 import com.memo.iframe.config.constant.Constant
 import com.memo.iframe.tools.arouter.ARouterClient
-import com.memo.iframe.tools.ext.onClick
-import com.memo.iframe.tools.ext.remove
-import com.memo.iframe.tools.ext.sp
-import com.memo.iframe.tools.ext.string
+import com.memo.iframe.tools.ext.*
 import com.memo.iframe.tools.utils.CommonHelper
 import com.memo.mine.R
 import kotlinx.android.synthetic.main.activity_setting.*
@@ -23,7 +20,6 @@ import kotlinx.android.synthetic.main.activity_setting.*
  */
 class SettingActivity : BaseMvpActivity<SettingContract.View, SettingPresenter>(),
     SettingContract.View {
-
 
     override fun showStatusView(): Boolean = false
 
@@ -77,7 +73,8 @@ class SettingActivity : BaseMvpActivity<SettingContract.View, SettingPresenter>(
             )
         }
         //退出登陆
-        mCvLoginOut.onClick {
+        mLlLoginOut.onClick {
+            mPbOut.visible()
             mPresenter.loginOut()
         }
 
@@ -93,6 +90,14 @@ class SettingActivity : BaseMvpActivity<SettingContract.View, SettingPresenter>(
     override fun onLoginOutSuccess() {
         sp().remove(Constant.SharedPreferences.COOKIE)
         ARouterClient.startLogin()
+    }
+
+    /**
+     * 登出失败
+     */
+    override fun onLoginOutFailure() {
+        //隐藏转圈圈
+        mPbOut.gone()
     }
 
 

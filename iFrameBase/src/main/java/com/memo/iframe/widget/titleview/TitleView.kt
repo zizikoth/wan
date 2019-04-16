@@ -32,6 +32,7 @@ class TitleView(context: Context, attrs: AttributeSet?) : FrameLayout(context, a
         val isLeftShow = typeArray.getBoolean(R.styleable.TitleView_tv_left_show, true)
         typeArray.recycle()
         mTvTitle.text = title
+        mTvTitle.isSelected = true
         if (rightIcon != null) {
             mIvMore.visible()
             mIvMore.setImageDrawable(rightIcon)

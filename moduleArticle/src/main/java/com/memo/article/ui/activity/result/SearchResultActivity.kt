@@ -86,8 +86,7 @@ class SearchResultActivity : BaseMvpActivity<SearchResultContract.View, SearchRe
             }
 
             override fun onLoadMore(refreshLayout: RefreshLayout?) {
-                page++
-                mPresenter.searchKeywordArticle(page, keyword)
+                mPresenter.searchKeywordArticle(++page, keyword)
             }
         })
     }

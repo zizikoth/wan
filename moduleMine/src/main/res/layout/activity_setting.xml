@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
     android:orientation="vertical"
     tools:context="com.memo.mine.ui.activity.setting.SettingActivity">
     
@@ -66,29 +66,34 @@
     </LinearLayout>
     
     
-    <FrameLayout
+    <LinearLayout
+        android:id="@+id/mLlLoginOut"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dp50">
+        android:layout_height="@dimen/dp70"
+        android:background="?selectableItemBackground"
+        android:orientation="horizontal">
         
-        <android.support.v7.widget.CardView
-            android:id="@+id/mCvLoginOut"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/dp20"
-            android:foreground="?selectableItemBackgroundBorderless"
-            app:cardCornerRadius="@dimen/dp15">
-            
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:padding="@dimen/dp15"
-                android:text="@string/LoginOut"
-                android:textColor="@color/color_EB4310"
-                android:textSize="@dimen/sp18"
-                android:textStyle="bold" />
-        </android.support.v7.widget.CardView>
-    </FrameLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/dp70"
+            android:gravity="center"
+            android:paddingStart="@dimen/dp20"
+            android:text="@string/LoginOut"
+            android:textColor="@color/color_EB4310"
+            android:textSize="@dimen/sp16"
+            android:textStyle="bold" />
+        
+        <ProgressBar
+            android:id="@+id/mPbOut"
+            android:layout_width="@dimen/dp30"
+            android:layout_height="@dimen/dp30"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="@dimen/dp15"
+            android:indeterminateTint="@color/color_main"
+            android:visibility="gone"
+            tools:ignore="UnusedAttribute"
+            tools:visibility="visible" />
+    </LinearLayout>
+
 
 </LinearLayout>

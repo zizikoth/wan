@@ -26,9 +26,6 @@
             android:name=".ui.activity.history.HistoryActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.activity.favorite.FavoriteActivity"
-            android:screenOrientation="portrait" />
-        <activity
             android:name=".ui.activity.todo.TodoActivity"
             android:screenOrientation="portrait" />
         <activity

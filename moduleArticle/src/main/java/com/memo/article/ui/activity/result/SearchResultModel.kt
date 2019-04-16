@@ -1,6 +1,6 @@
 package com.memo.article.ui.activity.result
 
-import com.memo.article.config.api.ArticleApi
+import com.memo.article.config.api.mArticleApi
 import com.memo.article.config.entity.Article
 import com.memo.iframe.config.api.convert
 import io.reactivex.Observable
@@ -18,5 +18,5 @@ class SearchResultModel : SearchResultContract.Model {
      * 获取关键字的文章
      */
     override fun searchKeywordArticle(page: Int, keyword: String): Observable<Article> =
-        ArticleApi.searchHotKeyword(page, keyword).convert()
+        mArticleApi.searchHotKeyword(page, keyword).convert()
 }

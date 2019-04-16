@@ -66,6 +66,15 @@ object CommonHelper {
         return Color.rgb(red, green, blue)
     }
 
+    @JvmStatic
+    fun reducePage(page: Int): Int {
+        return if (page - 1 > 0) {
+            page - 1
+        } else {
+            0
+        }
+    }
+
 
     /**
      * 关闭刷新
