@@ -45,7 +45,8 @@ data class ArticleData(
     var type: Int = 0, // 0
     var userId: Int = 0, // -1
     var visible: Int = 0, // 1
-    var zan: Int = 0 // 0
+    var zan: Int = 0,// 0
+    var isTop: Boolean = false
 )
 
 data class Tag(

@@ -7,8 +7,11 @@ import com.blankj.utilcode.util.ActivityUtils
 import com.flyco.tablayout.listener.OnTabSelectListener
 import com.memo.iframe.base.activity.BaseMvpActivity
 import com.memo.iframe.base.adapter.BaseFragmentPagerAdapter
+import com.memo.iframe.config.constant.Constant
 import com.memo.iframe.tools.arouter.ARouterClient
 import com.memo.iframe.tools.arouter.ARouterPath
+import com.memo.iframe.tools.ext.edit
+import com.memo.iframe.tools.ext.sp
 import com.memo.login.R
 import com.memo.login.ui.fragment.signin.SignInFragment
 import com.memo.login.ui.fragment.signup.SignUpFragment
@@ -63,7 +66,13 @@ class LoginActivity : BaseMvpActivity<LoginContract.View, LoginPresenter>(), Log
     /**
      * 进行初始化数据
      */
-    override fun initData(intent: Intent) {}
+    override fun initData(intent: Intent) {
+        //清楚本地缓存的数据
+        sp().edit {
+            remove(Constant.SharedPreferences.COOKIE)
+            remove(Constant.SharedPreferences.USERNAME)
+        }
+    }
 
     /**
      * 进行初始化控件

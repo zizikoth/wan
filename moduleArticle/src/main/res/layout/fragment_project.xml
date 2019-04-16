@@ -6,8 +6,14 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="com.memo.article.ui.fragment.project.tree.ProjectFragment">
-    
-    <com.flyco.tablayout.SlidingTabLayout
+	
+	<com.memo.iframe.widget.titleview.TitleView
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		app:tv_left_show="false"
+		app:tv_title="项目" />
+	
+	<com.flyco.tablayout.SlidingTabLayout
         android:id="@+id/mTabLayout"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp45"

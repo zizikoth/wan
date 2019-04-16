@@ -48,6 +48,12 @@ interface ArticleApiService {
     fun addFavoriteArticle(@Path("id") id: String): Observable<BaseResponse<EmptyResponse>>
 
     /**
+     * 取消收藏文章
+     */
+    @POST("lg/uncollect/{id}/json")
+    fun removeFavoriteArticle(@Path("id") id: String): Observable<BaseResponse<EmptyResponse>>
+
+    /**
      * 获取体系树
      */
     @GET("tree/json")

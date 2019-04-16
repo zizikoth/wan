@@ -65,7 +65,8 @@ ext {
             magicindicaotr    : "com.github.hackware1993:MagicIndicator:1.6.0",
             agentweb          : "com.just.agentweb:agentweb:4.0.2",
             rwidget           : "com.ruffian.library:RWidgetHelper:1.0.8",
-            flexbox           : "com.google.android:flexbox:1.0.0"
+            flexbox           : "com.google.android:flexbox:1.0.0",
+            swiplayout        : "com.daimajia.swipelayout:library:1.2.0@aar"
     ]
 
     kapt = [

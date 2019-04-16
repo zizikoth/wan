@@ -1,40 +1,116 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.ruffian.library.widget.RFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginStart="@dimen/dp15"
-    android:layout_marginTop="@dimen/dp8"
-    android:layout_marginEnd="@dimen/dp15"
-    android:layout_marginBottom="@dimen/dp8"
-    app:background_normal="@color/white">
-    
-    <com.memo.iframe.widget.textview.SlantedTextView
-        android:layout_width="@dimen/dp80"
-        android:layout_height="@dimen/dp80"
-        app:slantedBackgroundColor="@color/color_main"
-        app:slantedMode="left"
-        app:slantedTextColor="@color/white"
-        app:slantedTextSize="@dimen/sp12"
-        tools:slantedText="aaa" />
-    
-    <com.ruffian.library.widget.RTextView
-        android:id="@+id/mTvTop"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="right"
-        android:layout_marginTop="@dimen/dp10"
-        android:layout_marginEnd="@dimen/dp10"
-        android:paddingLeft="@dimen/dp8"
-        android:paddingTop="@dimen/dp4"
-        android:paddingRight="@dimen/dp8"
-        android:paddingBottom="@dimen/dp4"
-        android:text="置顶"
-        android:textColor="@color/color_EB4310"
-        app:border_color_normal="@color/color_EB4310"
-        app:border_width_normal="@dimen/dp1"
-        app:corner_radius="@dimen/dp3" />
+<com.ruffian.library.widget.RRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:layout_marginStart="@dimen/dp15"
+	android:layout_marginTop="@dimen/dp8"
+	android:layout_marginEnd="@dimen/dp15"
+	android:layout_marginBottom="@dimen/dp8"
+	android:background="?selectableItemBackground"
+	app:background_normal="@color/white"
+	app:corner_radius="@dimen/dp5">
+	
+	<com.ruffian.library.widget.RTextView
+		android:id="@+id/mTvTop"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_alignParentEnd="true"
+		android:layout_marginTop="@dimen/dp10"
+		android:layout_marginEnd="@dimen/dp15"
+		android:paddingStart="@dimen/dp4"
+		android:paddingTop="@dimen/dp2"
+		android:paddingEnd="@dimen/dp4"
+		android:paddingBottom="@dimen/dp2"
+		android:text="@string/SetTop"
+		android:textColor="@color/color_EB4310"
+		android:textSize="@dimen/sp12"
+		app:border_color_normal="@color/color_EB4310"
+		app:border_width_normal="@dimen/dp1"
+		app:corner_radius="@dimen/dp3" />
+	
+	<TextView
+		android:id="@+id/mTvAutor"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_marginStart="@dimen/dp60"
+		android:layout_marginTop="@dimen/dp15"
+		android:textColor="@color/color_333333"
+		android:textSize="@dimen/sp14"
+		tools:text="BlankJ" />
+	
+	<com.memo.iframe.widget.textview.AlignTextView
+		android:id="@+id/mTvTitle"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginStart="@dimen/dp15"
+		android:layout_marginTop="@dimen/dp40"
+		android:layout_marginEnd="@dimen/dp15"
+		android:ellipsize="end"
+		android:maxLines="2"
+		android:textColor="@color/color_333333"
+		android:textSize="@dimen/sp16"
+		android:textStyle="bold"
+		tools:text="RecyclerView 性能优化 | 安卓 offer 收割基" />
+	
+	<com.memo.iframe.widget.textview.AlignTextView
+		android:id="@+id/mTvDesc"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_below="@id/mTvTitle"
+		android:layout_alignStart="@id/mTvTitle"
+		android:layout_alignEnd="@id/mTvTitle"
+		android:ellipsize="end"
+		android:maxLines="3"
+		android:paddingTop="@dimen/dp10"
+		android:textColor="@color/color_666666"
+		tools:text="感谢那些热爱开源、一起奋斗的朋友们。值得学习的话，Star哦^_^" />
+	
+	<com.memo.iframe.widget.textview.SlantedTextView
+		android:id="@+id/mTvLabel"
+		android:layout_width="@dimen/dp70"
+		android:layout_height="@dimen/dp70"
+		app:slantedBackgroundColor="#8849A2FF"
+		app:slantedLength="@dimen/dp25"
+		app:slantedMode="left"
+		app:slantedText="Android"
+		app:slantedTextColor="@color/white"
+		app:slantedTextSize="@dimen/sp10" />
+	
+	<TextView
+		android:id="@+id/mTvChapter"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_below="@id/mTvDesc"
+		android:layout_marginStart="@dimen/dp15"
+		android:layout_marginTop="@dimen/dp10"
+		android:textColor="@color/color_666666"
+		android:textSize="@dimen/sp14"
+		tools:text="RecyclerView" />
+	
+	
+	<TextView
+		android:id="@+id/mTvTime"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_below="@id/mTvChapter"
+		android:layout_alignStart="@id/mTvChapter"
+		android:layout_marginTop="@dimen/dp10"
+		android:layout_marginBottom="@dimen/dp15"
+		android:textColor="@color/color_666666"
+		tools:text="3小时前" />
+	
+	<ImageView
+		android:id="@+id/mIvFavorite"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_alignTop="@id/mTvChapter"
+		android:layout_alignBottom="@id/mTvTime"
+		android:layout_alignParentEnd="true"
+		android:layout_marginEnd="@dimen/dp15"
+		android:src="@drawable/ic_favorite"
+		tools:ignore="ContentDescription" />
 
 
-</com.ruffian.library.widget.RFrameLayout>
+</com.ruffian.library.widget.RRelativeLayout>

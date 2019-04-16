@@ -37,6 +37,9 @@ class ArticleModel : ArticleContract.Model {
 
         return Observable.zip(topArticle, articles, banners,
             Function3<ArrayList<ArticleData>, Article, ArrayList<MainBanner>, MainData> { top, article, banner ->
+                top.forEach {
+                    it.isTop = true
+                }
                 article.datas.addAll(0, top)
                 MainData(article, banner)
             })
