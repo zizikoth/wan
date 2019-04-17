@@ -8,6 +8,7 @@ import com.memo.article.config.entity.Tree
 import com.memo.article.ui.activity.tree.TreeArticleActivity
 import com.memo.article.ui.adapter.NaviAdapter
 import com.memo.iframe.base.fragment.BaseMvpFragment
+import com.memo.iframe.tools.utils.CommonHelper
 import kotlinx.android.synthetic.main.fragment_navigation.*
 
 /**
@@ -72,5 +73,13 @@ class NaviFragment : BaseMvpFragment<NaviContract.View, NaviPresenter>(), NaviCo
         mAdapter.setNewData(response)
     }
 
+    /**
+     * 滑动到顶部
+     */
+    fun scrollToTop() {
+        if (userVisibleHint) {
+            CommonHelper.scrollToTop(mRvList)
+        }
+    }
 
 }

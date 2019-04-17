@@ -2,6 +2,8 @@ package com.memo.iframe.tools.utils
 
 import android.content.Context
 import android.graphics.Color
+import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
 import com.blankj.utilcode.util.FileUtils
 import com.memo.iframe.config.constant.Constant
 import com.memo.iframe.tools.arouter.ARouterClient
@@ -104,6 +106,22 @@ object CommonHelper {
                 .setOnTipClickListener { ARouterClient.startLogin() }
                 .show()
             false
+        }
+    }
+
+    /**
+     * 滑动到顶部
+     */
+    @JvmStatic
+    fun scrollToTop(mRvList: RecyclerView?) {
+        mRvList?.run {
+            if (layoutManager is LinearLayoutManager) {
+                if ((layoutManager as LinearLayoutManager).findFirstVisibleItemPosition() > 10) {
+                    scrollToPosition(0)
+                } else {
+                    smoothScrollToPosition(0)
+                }
+            }
         }
     }
 }

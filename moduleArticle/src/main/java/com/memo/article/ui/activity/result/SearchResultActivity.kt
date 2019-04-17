@@ -5,10 +5,8 @@ import android.content.Intent
 import android.support.v7.widget.LinearLayoutManager
 import com.memo.article.R
 import com.memo.article.config.entity.Article
-import com.memo.article.config.entity.ArticleData
 import com.memo.article.ui.adapter.ArticleAdapter
 import com.memo.iframe.base.activity.BaseMvpActivity
-import com.memo.iframe.tools.arouter.ARouterClient
 import com.memo.iframe.tools.ext.startActivity
 import com.memo.iframe.tools.utils.CommonHelper
 import com.scwang.smartrefresh.layout.api.RefreshLayout
@@ -72,12 +70,6 @@ class SearchResultActivity : BaseMvpActivity<SearchResultContract.View, SearchRe
      * 进行初始化监听
      */
     override fun initListener() {
-        //列表的点击事件
-        mAdapter.setOnItemClickListener { _, _, position ->
-            val articleData: ArticleData = mAdapter.data[position]
-            ARouterClient.startAgentWeb(articleData.title, articleData.link)
-        }
-
         //刷新
         mRefreshLayout.setOnRefreshLoadMoreListener(object : OnRefreshLoadMoreListener {
             override fun onRefresh(refreshLayout: RefreshLayout?) {

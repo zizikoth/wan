@@ -74,4 +74,11 @@ class FragmentHelper constructor(containerResId: Int, fragmentManager: FragmentM
             mLastIndex = index
         }
     }
+
+    /**
+     * 获取下标的Fragment
+     */
+    fun getFragment(index: Int): Fragment {
+        return mStack[index]
+    }
 }

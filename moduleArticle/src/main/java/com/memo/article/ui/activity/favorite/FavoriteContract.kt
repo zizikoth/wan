@@ -3,6 +3,7 @@ package com.memo.article.ui.activity.favorite
 import com.memo.article.config.entity.Article
 import com.memo.iframe.base.mvp.IModel
 import com.memo.iframe.base.mvp.IView
+import com.memo.iframe.config.entity.EmptyResponse
 import io.reactivex.Observable
 
 /**
@@ -19,6 +20,11 @@ interface FavoriteContract {
          * 获取我的收藏
          */
         fun getFavoriteList(page: Int): Observable<Article>
+
+        /**
+         * 删除我的收藏
+         */
+        fun removeFavorite(id: Int, originId: Int): Observable<EmptyResponse>
     }
 
     interface View : IView {
@@ -31,6 +37,11 @@ interface FavoriteContract {
          * 获取收藏失败
          */
         fun onGetFavoriteFailure()
+
+        /**
+         * 删除我的收藏成功
+         */
+        fun onRemoveFavoriteSuccess(id: Int)
     }
 
     interface Presenter {
@@ -38,5 +49,10 @@ interface FavoriteContract {
          * 获取我的收藏
          */
         fun getFavoriteList(page: Int)
+
+        /**
+         * 删除我的收藏
+         */
+        fun removeFavorite(id: Int, originId: Int)
     }
 }

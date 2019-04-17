@@ -36,6 +36,7 @@ data class ArticleData(
     var link: String = "", // http://www.wanandroid.com/blog/show/2501
     var niceDate: String = "", // 2019-02-17
     var origin: String = "",
+    var originId: Int = -1,
     var projectLink: String = "", // https://github.com/MeandNi/Flutter_ZhiHu
     var publishTime: Long = 0, // 1550410055000
     var superChapterId: Int = 0, // 294
@@ -45,7 +46,7 @@ data class ArticleData(
     var type: Int = 0, // 0
     var userId: Int = 0, // -1
     var visible: Int = 0, // 1
-    var zan: Int = 0,// 0
+    var zan: Int = 0, // 0
     var isTop: Boolean = false
 )
 

@@ -22,6 +22,8 @@ import kotlinx.android.synthetic.main.fragment_project.*
 class ProjectFragment : BaseMvpFragment<ProjectContract.View, ProjectPresenter>(),
     ProjectContract.View {
 
+    private val fragments: ArrayList<Fragment> by lazy { arrayListOf<Fragment>() }
+
     override fun showStatusView(): Boolean = false
 
     /**
@@ -70,14 +72,21 @@ class ProjectFragment : BaseMvpFragment<ProjectContract.View, ProjectPresenter>(
      * 获取项目体系成功
      */
     override fun onGetProjectTreeSuccess(response: ArrayList<Project>) {
-        val fragments: ArrayList<Fragment> = arrayListOf()
         val titles: Array<String> = Array(response.size) {
             val article = response[it]
             fragments.add(ProjectArticleFragment.newInstance(article.id.toString()))
             Html.fromHtml(article.name).toString()
         }
         mTabLayout.setViewPager(mVpContainer, titles, mActivity, fragments)
+    }
 
+    /**
+     * 找到当前Fragment 让列表滑动到顶部
+     */
+    fun scrollToTop() {
+        mTabLayout?.run {
+            (fragments[currentTab] as ProjectArticleFragment).scrollToTop()
+        }
     }
 
 }

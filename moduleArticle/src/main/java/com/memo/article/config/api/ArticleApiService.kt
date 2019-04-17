@@ -50,8 +50,14 @@ interface ArticleApiService {
     /**
      * 取消收藏文章
      */
-    @POST("lg/uncollect/{id}/json")
+    @POST("lg/uncollect_originId/{id}/json")
     fun removeFavoriteArticle(@Path("id") id: String): Observable<BaseResponse<EmptyResponse>>
+
+    /*
+     * 收藏页面取消收藏文章
+     */
+    @POST("lg/uncollect/{id}/json")
+    fun removeFavorite(@Path("id") id: String, @Query("originId") originId: String): Observable<BaseResponse<EmptyResponse>>
 
     /**
      * 获取体系树

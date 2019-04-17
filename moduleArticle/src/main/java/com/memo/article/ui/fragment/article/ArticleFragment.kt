@@ -4,8 +4,8 @@ package com.memo.article.ui.fragment.article
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.view.View
+import com.blankj.utilcode.util.LogUtils
 import com.memo.article.R
-import com.memo.article.config.entity.ArticleData
 import com.memo.article.config.entity.MainBanner
 import com.memo.article.config.entity.MainData
 import com.memo.article.ui.activity.search.SearchActivity
@@ -95,12 +95,6 @@ class ArticleFragment : BaseMvpFragment<ArticleContract.View, ArticlePresenter>(
             }
         })
 
-        //列表的点击事件
-        mAdapter.addOnItemClickListener { _, position ->
-            val articleData: ArticleData = mAdapter.data[position]
-            ARouterClient.startAgentWeb(articleData.title, articleData.link)
-        }
-
         //轮播图点击事件
         mHeader.mBanner.setOnBannerListener { position ->
             mBannerData?.let {
@@ -144,6 +138,12 @@ class ArticleFragment : BaseMvpFragment<ArticleContract.View, ArticlePresenter>(
             } else {
                 mAdapter.addData(it.datas)
             }
+
+            val builder: StringBuilder = StringBuilder()
+            mAdapter.data.forEach { data ->
+                builder.append(data.title).append("\n")
+            }
+            LogUtils.iTag("article", builder)
         }
     }
 
@@ -153,6 +153,13 @@ class ArticleFragment : BaseMvpFragment<ArticleContract.View, ArticlePresenter>(
     override fun onFailureData() {
         page = CommonHelper.reducePage(page)
         CommonHelper.finishRefresh(mRefreshLayout)
+    }
+
+    /**
+     * 滑动到顶部
+     */
+    fun scrollToTop() {
+        CommonHelper.scrollToTop(mRvList)
     }
 
     override fun onResume() {

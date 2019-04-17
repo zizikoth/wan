@@ -24,7 +24,6 @@ class Constant {
 
         const val URL_COOKIE_ADD_COLLECTIONS = "lg/collect"
         const val URL_COOKIE_ADD_UNCOLLECTIONS = "lg/uncollect"
-        const val URL_COOKIE_ADD_ARTICLE = "article"
         const val URL_COOKIE_ADD_TODO = "lg/todo"
     }
 

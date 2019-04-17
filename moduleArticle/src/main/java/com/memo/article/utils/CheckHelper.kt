@@ -14,7 +14,7 @@ object CheckHelper {
     @JvmStatic
     fun checkSearch(keyword: String?): Boolean {
         return if (keyword.isNullOrEmpty()) {
-            toast("¿ ¿ ¿ 你在找些什么 ¿ ¿ ¿ ")
+            toast("想要找些什么？")
             false
         } else {
             true

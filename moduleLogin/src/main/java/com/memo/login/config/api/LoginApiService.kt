@@ -16,7 +16,7 @@ import retrofit2.http.Query
  * @date 2019-04-12 17:02
  */
 
-val LoginApi: LoginApiService by lazy { ApiClient.create(LoginApiService::class.java) }
+val mLoginApi: LoginApiService by lazy { ApiClient.create(LoginApiService::class.java) }
 
 interface LoginApiService {
 

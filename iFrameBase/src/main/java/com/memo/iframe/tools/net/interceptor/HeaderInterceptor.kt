@@ -22,10 +22,10 @@ class HeaderInterceptor : Interceptor {
         val logBuilder: StringBuilder = StringBuilder()
 
         //通过网址判断是否需要添加Cookie
-        val needAddCookie = url.contains(Constant.Http.URL_COOKIE_ADD_ARTICLE) ||
-                url.contains(Constant.Http.URL_COOKIE_ADD_COLLECTIONS) ||
-                url.contains(Constant.Http.URL_COOKIE_ADD_UNCOLLECTIONS) ||
-                url.contains(Constant.Http.URL_COOKIE_ADD_TODO)
+        val needAddCookie =
+            url.contains(Constant.Http.URL_COOKIE_ADD_COLLECTIONS) ||
+                    url.contains(Constant.Http.URL_COOKIE_ADD_UNCOLLECTIONS) ||
+                    url.contains(Constant.Http.URL_COOKIE_ADD_TODO)
         logBuilder.append("url = $url  \nNeedAddCookie = $needAddCookie")
 
         if (needAddCookie && Constant.cookie.isNotEmpty()) {

@@ -32,10 +32,11 @@ class ArticleModel : ArticleContract.Model {
      */
     override fun getMainData(page: Int): Observable<MainData> {
         val topArticle = mArticleApi.getTopArticles().convert()
-        val articles = mArticleApi.getMainArticles(page).convert()
+        val mainArticle = mArticleApi.getMainArticles(page).convert()
         val banners = mArticleApi.getMainBanner().convert()
 
-        return Observable.zip(topArticle, articles, banners,
+        return Observable.zip(
+            topArticle, mainArticle, banners,
             Function3<ArrayList<ArticleData>, Article, ArrayList<MainBanner>, MainData> { top, article, banner ->
                 top.forEach {
                     it.isTop = true

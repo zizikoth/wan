@@ -14,7 +14,7 @@ import retrofit2.http.GET
  * @date 2019-04-14 02:14
  */
 
-val MineApi: MineApiService by lazy { ApiClient.create(MineApiService::class.java) }
+val mMineApi: MineApiService by lazy { ApiClient.create(MineApiService::class.java) }
 
 interface MineApiService {
 

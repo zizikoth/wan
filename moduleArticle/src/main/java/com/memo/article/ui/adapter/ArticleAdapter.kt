@@ -10,6 +10,9 @@ import com.memo.article.config.entity.ArticleData
 import com.memo.iframe.base.adapter.BaseAdapter
 import com.memo.iframe.config.api.convertEmpty
 import com.memo.iframe.config.api.execute
+import com.memo.iframe.tools.arouter.ARouterClient
+import com.memo.iframe.tools.ext.string
+import com.memo.iframe.widget.textview.AlignTextView
 import com.memo.iframe.widget.textview.SlantedTextView
 
 /**
@@ -28,37 +31,40 @@ class ArticleAdapter : BaseAdapter<ArticleData, BaseViewHolder>(R.layout.item_ar
                 val article = data[position]
                 val isCollect = article.collect
                 (view as ImageView).setImageResource(
-                    if (isCollect) {
-                        article.collect = false
+                    if (!isCollect) {
+                        article.collect = true
                         //收藏
                         mArticleApi.addFavoriteArticle(article.id.toString()).convertEmpty()
                             .execute {
-                                LogUtils.iTag(
-                                    "favorite",
-                                    "${article.id} ${article.collect}"
-                                )
+                                LogUtils.iTag("favorite", "${article.id} ${article.collect}")
                             }
-                        R.drawable.ic_favorite
+                        R.drawable.ic_favorited
                     } else {
-                        article.collect = true
+                        article.collect = false
                         //取消收藏
                         mArticleApi.removeFavoriteArticle(article.id.toString()).convertEmpty()
                             .execute {
-                                LogUtils.iTag(
-                                    "favorite",
-                                    "${article.id} ${article.collect}"
-                                )
+                                LogUtils.iTag("favorite", "${article.id} ${article.collect}")
                             }
-                        R.drawable.ic_favorited
+                        R.drawable.ic_favorite
                     }
                 )
             }
         }
+
+        addOnItemClickListener { _, position ->
+            val articleData: ArticleData = data[position]
+            ARouterClient.startAgentWeb(articleData.title, articleData.link)
+        }
     }
 
     override fun initialize(helper: BaseViewHolder, item: ArticleData) {
+
+        helper.getView<AlignTextView>(R.id.mTvTitle).reset()
+        helper.getView<AlignTextView>(R.id.mTvDesc).reset()
+
         helper.addOnClickListener(R.id.mIvFavorite)
-            .setVisible(R.id.mTvTop, item.isTop)
+            .setGone(R.id.mTvTop, item.isTop)
             .setText(R.id.mTvAutor, item.author)
             .setText(R.id.mTvTitle, Html.fromHtml(item.title).toString())
             .setText(R.id.mTvDesc, Html.fromHtml(item.desc).toString())
@@ -73,7 +79,11 @@ class ArticleAdapter : BaseAdapter<ArticleData, BaseViewHolder>(R.layout.item_ar
                 }
             )
 
-        helper.getView<SlantedTextView>(R.id.mTvLabel).text = item.superChapterName
+        helper.getView<SlantedTextView>(R.id.mTvLabel).text = if (item.superChapterName.isEmpty()) {
+            mContext.string(R.string.Android)
+        } else {
+            item.superChapterName
+        }
 
     }
 }

@@ -3,5 +3,7 @@
     <string name="SearchHint">开始找寻新大陆...</string>
     <string name="HotSearch">热门搜索</string>
     <string name="SetTop">置顶</string>
+    <string name="Android">Android</string>
+    <string name="DeleteFavorite">删除</string>
 
 </resources>

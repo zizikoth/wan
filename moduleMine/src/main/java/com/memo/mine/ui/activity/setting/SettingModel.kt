@@ -2,7 +2,7 @@ package com.memo.mine.ui.activity.setting
 
 import com.memo.iframe.config.api.convertEmpty
 import com.memo.iframe.config.entity.EmptyResponse
-import com.memo.mine.config.api.MineApi
+import com.memo.mine.config.api.mMineApi
 import io.reactivex.Observable
 
 /**
@@ -15,5 +15,5 @@ import io.reactivex.Observable
 class SettingModel : SettingContract.Model {
 
     override fun loginOut(): Observable<EmptyResponse> =
-        MineApi.loginOut().convertEmpty()
+        mMineApi.loginOut().convertEmpty()
 }

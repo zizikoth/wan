@@ -29,7 +29,6 @@ class MineFragment : BaseFragment() {
 
     private val Favorite: String = "我的收藏"
     private val Todo: String = "待做清单"
-    private val History: String = "浏览记录"
     private val About: String = "关于我们"
 
     private val mAdapter: MineAdapter by lazy { MineAdapter() }
@@ -50,7 +49,6 @@ class MineFragment : BaseFragment() {
         mData.apply {
             add(MineData(R.drawable.ic_mine_favorite, Favorite))
             add(MineData(R.drawable.ic_mine_todo, Todo))
-            add(MineData(R.drawable.ic_mine_history, History))
             add(MineData(R.drawable.ic_mine_about, About))
         }
     }
@@ -87,10 +85,6 @@ class MineFragment : BaseFragment() {
                 // To Do
                 Todo -> {
                     startActivity<TodoActivity>()
-                }
-                //浏览历史
-                History -> {
-                    //startActivity<HistoryActivity>()
                 }
                 //关于我们
                 About -> {

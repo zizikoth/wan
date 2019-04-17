@@ -5,7 +5,8 @@ import android.support.v7.widget.LinearLayoutManager
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.memo.article.R
 import com.memo.article.config.entity.Article
-import com.memo.article.ui.adapter.ArticleAdapter
+import com.memo.article.config.entity.ArticleData
+import com.memo.article.ui.adapter.FavoriteAdapter
 import com.memo.iframe.base.activity.BaseMvpActivity
 import com.memo.iframe.tools.arouter.ARouterClient
 import com.memo.iframe.tools.arouter.ARouterPath
@@ -25,8 +26,7 @@ import kotlinx.android.synthetic.main.activity_favorite.*
 class FavoriteActivity : BaseMvpActivity<FavoriteContract.View, FavoritePresenter>(),
     FavoriteContract.View {
 
-
-    private val mAdapter by lazy { ArticleAdapter() }
+    private val mAdapter by lazy { FavoriteAdapter() }
 
     /*** 页码 ***/
     private var page: Int = 0
@@ -72,12 +72,17 @@ class FavoriteActivity : BaseMvpActivity<FavoriteContract.View, FavoritePresente
             override fun onLoadMore(refreshLayout: RefreshLayout?) {
                 mPresenter.getFavoriteList(++page)
             }
-
         })
-        //条目点击
-        mAdapter.addOnItemClickListener { _, position ->
-            val article = mAdapter.data[position]
-            ARouterClient.startAgentWeb(article.title, article.link)
+        mAdapter.addOnItemChildClickListener { view, position ->
+            val article: ArticleData = mAdapter.data[position]
+            when (view.id) {
+                R.id.mTvDelete -> {
+                    mPresenter.removeFavorite(article.id, article.originId)
+                }
+                R.id.mTvContent -> {
+                    ARouterClient.startAgentWeb(article.title, article.id.toString())
+                }
+            }
         }
     }
 
@@ -107,6 +112,19 @@ class FavoriteActivity : BaseMvpActivity<FavoriteContract.View, FavoritePresente
     override fun onGetFavoriteFailure() {
         page = CommonHelper.reducePage(page)
         CommonHelper.finishRefresh(mRefreshLayout)
+    }
+
+    /**
+     * 删除我的收藏成功
+     */
+    override fun onRemoveFavoriteSuccess(id: Int) {
+        //删除条目
+        for ((position, article) in mAdapter.data.withIndex()) {
+            if (article.id == id) {
+                mAdapter.remove(position)
+                break
+            }
+        }
     }
 
 }

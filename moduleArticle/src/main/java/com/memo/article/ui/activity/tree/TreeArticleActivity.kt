@@ -7,7 +7,6 @@ import com.memo.article.R
 import com.memo.article.config.entity.Article
 import com.memo.article.ui.adapter.ArticleAdapter
 import com.memo.iframe.base.activity.BaseMvpActivity
-import com.memo.iframe.tools.arouter.ARouterClient
 import com.memo.iframe.tools.ext.startActivity
 import com.memo.iframe.tools.utils.CommonHelper
 import com.scwang.smartrefresh.layout.api.RefreshLayout
@@ -82,11 +81,6 @@ class TreeArticleActivity : BaseMvpActivity<TreeArticleContract.View, TreeArticl
             }
 
         })
-        //条目点击
-        mAdapter.addOnItemClickListener { _, position ->
-            val article = mAdapter.data[position]
-            ARouterClient.startAgentWeb(article.title, article.link)
-        }
     }
 
     /**

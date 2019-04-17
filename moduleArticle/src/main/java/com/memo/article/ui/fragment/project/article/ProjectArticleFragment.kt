@@ -7,7 +7,6 @@ import com.memo.article.R
 import com.memo.article.config.entity.Article
 import com.memo.article.ui.adapter.ArticleAdapter
 import com.memo.iframe.base.fragment.BaseMvpFragment
-import com.memo.iframe.tools.arouter.ARouterClient
 import com.memo.iframe.tools.utils.CommonHelper
 import com.scwang.smartrefresh.layout.api.RefreshLayout
 import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener
@@ -86,11 +85,6 @@ class ProjectArticleFragment :
             }
 
         })
-        // 条目点击
-        mAdapter.addOnItemClickListener { _, position ->
-            val article = mAdapter.data[position]
-            ARouterClient.startAgentWeb(article.title, article.link)
-        }
     }
 
     /**
@@ -119,6 +113,13 @@ class ProjectArticleFragment :
     override fun onGetProjectArticleFailure() {
         CommonHelper.finishRefresh(mRefreshLayout)
         page = CommonHelper.reducePage(page)
+    }
+
+    /**
+     * 滑动到顶部
+     */
+    fun scrollToTop() {
+        CommonHelper.scrollToTop(mRvList)
     }
 
 

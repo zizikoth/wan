@@ -12,6 +12,7 @@ import com.memo.iframe.config.api.execute
  */
 class FavoritePresenter : BasePresenter<FavoriteModel, FavoriteContract.View>(),
     FavoriteContract.Presenter {
+
     /**
      * 绑定Model
      */
@@ -29,5 +30,16 @@ class FavoritePresenter : BasePresenter<FavoriteModel, FavoriteContract.View>(),
             }, {
                 mView.onGetFavoriteFailure()
             })
+    }
+
+
+    /**
+     * 删除我的收藏
+     */
+    override fun removeFavorite(id: Int, originId: Int) {
+        mModel.removeFavorite(id, originId)
+            .execute(mView, false, true) {
+                mView.onRemoveFavoriteSuccess(id)
+            }
     }
 }
