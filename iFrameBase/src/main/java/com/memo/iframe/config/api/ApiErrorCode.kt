@@ -33,4 +33,9 @@ object ApiErrorCode {
      */
     const val DATA_ERROR = 1004
 
+    /**
+     * 未知错误
+     */
+    const val UNKNOW_ERROR = 1005
+
 }

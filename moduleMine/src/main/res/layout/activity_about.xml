@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:overScrollMode="never"
+    tools:context="com.memo.mine.ui.activity.about.AboutActivity">
+    
+    <com.ruffian.library.widget.RTextView
+        android:id="@+id/mTvContent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/dp10"
+        android:padding="@dimen/dp15"
+        app:background_normal="@color/white"
+        app:corner_radius="@dimen/dp10" />
+
+
+</android.support.v4.widget.NestedScrollView>

@@ -5,10 +5,11 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.Gravity
 import android.view.View
 import android.view.animation.Animation
-import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.BaseViewHolder
 import com.memo.iframe.R
+import com.memo.iframe.base.adapter.BaseAdapter
 import com.memo.iframe.tools.ext.onClick
+import com.memo.iframe.tools.utils.ClickHelper
 import kotlinx.android.synthetic.main.dialog_bottom_list.view.*
 import razerdp.basepopup.BasePopupWindow
 
@@ -31,9 +32,9 @@ class BottomListDialog constructor(context: Context, data: ArrayList<String> = a
     /**
      * 适配器
      */
-    private val mAdapter: BaseQuickAdapter<String, BaseViewHolder> =
-        object : BaseQuickAdapter<String, BaseViewHolder>(R.layout.dialog_bottom_list_item) {
-            override fun convert(helper: BaseViewHolder, item: String) {
+    private val mAdapter: BaseAdapter<String, BaseViewHolder> =
+        object : BaseAdapter<String, BaseViewHolder>(R.layout.dialog_bottom_list_item) {
+            override fun initialize(helper: BaseViewHolder, item: String) {
                 helper.setText(R.id.mTvContent, item)
                     .setGone(R.id.mLine, helper.adapterPosition != mData.size)
             }
@@ -139,12 +140,15 @@ class BottomListDialog constructor(context: Context, data: ArrayList<String> = a
      * 设置点击监听
      */
     fun setOnItemClickListener(method: (position: Int, item: String) -> Unit): BottomListDialog {
+
         mListener = object : OnItemClickListener {
             /**
              * 条目点击
              */
             override fun onItemClick(position: Int, item: String) {
-                method(position, item)
+                if (ClickHelper.isNotFastClick) {
+                    method(position, item)
+                }
             }
         }
         return this

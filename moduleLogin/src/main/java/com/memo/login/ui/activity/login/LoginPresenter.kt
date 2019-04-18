@@ -2,7 +2,9 @@ package com.memo.login.ui.activity.login
 
 import com.memo.iframe.base.mvp.BasePresenter
 import com.memo.iframe.config.api.execute
-import com.memo.iframe.tools.utils.log
+import com.memo.iframe.config.constant.Constant
+import com.memo.iframe.tools.ext.put
+import com.memo.iframe.tools.ext.sp
 
 /**
  * title:
@@ -27,7 +29,10 @@ class LoginPresenter : BasePresenter<LoginModel, LoginContract.View>(), LoginCon
      */
     override fun signIn(account: String, pwd: String) {
         mModel.signIn(account, pwd)
-            .execute(mView) {
+            .doOnNext {
+                sp().put(Constant.SharedPreferences.USERNAME, it.username)
+            }
+            .execute(mView, false, false) {
                 mView.onSignInSuccess()
             }
     }
@@ -41,9 +46,8 @@ class LoginPresenter : BasePresenter<LoginModel, LoginContract.View>(), LoginCon
      */
     override fun signUp(account: String, pwd: String, rePwd: String) {
         mModel.signUp(account, pwd, rePwd)
-            .execute(mView) {
-                log(it)
-                mView.onSignInSuccess()
+            .execute(mView, false, false) {
+                signIn(account, pwd)
             }
     }
 

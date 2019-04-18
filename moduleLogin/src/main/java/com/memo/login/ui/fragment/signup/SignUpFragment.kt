@@ -3,7 +3,9 @@ package com.memo.login.ui.fragment.signup
 
 import android.os.Bundle
 import com.memo.iframe.base.fragment.BaseFragment
+import com.memo.iframe.tools.ext.gone
 import com.memo.iframe.tools.ext.onClick
+import com.memo.iframe.tools.ext.visible
 import com.memo.login.R
 import com.memo.login.ui.activity.login.LoginActivity
 import com.memo.login.utils.CheckHelper
@@ -48,6 +50,8 @@ class SignUpFragment : BaseFragment() {
             if (CheckHelper.checkSignUp(account, pwd, rePwd)) {
                 //登陆
                 if (mActivity is LoginActivity) {
+                    mTvSignUp.isEnabled = false
+                    mProgress.visible()
                     (mActivity as LoginActivity).signUp(account, pwd, rePwd)
                 }
             }
@@ -58,6 +62,14 @@ class SignUpFragment : BaseFragment() {
      * 开始进行业务操作
      */
     override fun start() {
+    }
+
+    /**
+     * 登陆结束
+     */
+    fun finishSignUP() {
+        mTvSignUp.isEnabled = true
+        mProgress.gone()
     }
 
 }

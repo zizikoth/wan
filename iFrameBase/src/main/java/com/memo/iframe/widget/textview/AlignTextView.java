@@ -1,285 +1,362 @@
 package com.memo.iframe.widget.textview;
 
+import android.annotation.SuppressLint;
+import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.graphics.Canvas;
 import android.graphics.Paint;
-import android.support.v7.widget.AppCompatTextView;
-import android.text.TextPaint;
+import android.os.Build;
+import android.text.TextUtils;
 import android.util.AttributeSet;
-import android.util.TypedValue;
-import android.view.Gravity;
+import android.util.Log;
 import android.widget.TextView;
 
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
+
 /**
- * title: 两端对齐的text view，可以设置最后一行靠左，靠右，居中对齐
- * tip:
- *
- * @author zhou
- * @date 2018/11/15 下午3:19
+ * 对齐的TextView
+ * <p>
+ * 为了能够使TextView能够很好的进行排版，同时考虑到原生TextView中以word进行分割排版，
+ * 那么我们可以将要换行的地方进行添加空格处理，这样就可以在合适的位置换行，同时也不会
+ * 打乱原生的TextView的排版换行选择复制等问题。为了能够使右端尽可能的对齐，将右侧多出的空隙
+ * 尽可能的分配到该行的标点后面。达到两段对齐的效果。
+ * </p>
+ * <p>
+ * 重新设置文本前，请调用reset()进行状态重置。
+ * </p>
+ * Created by yuedong.lyd on 6/28/15.
  */
-public class AlignTextView extends AppCompatTextView {
-    /**
-     * 单行文字高度
-     */
-    private float textHeight;
-    /**
-     * 额外的行间距
-     */
-    private float textLineSpaceExtra = 0;
-    /**
-     * textView宽度
-     */
-    private int width;
-    /**
-     * 分割后的行
-     */
-    private List<String> lines = new ArrayList<>();
-    /**
-     * 尾行
-     */
-    private List<Integer> tailLines = new ArrayList<>();
-    /**
-     * 默认最后一行左对齐
-     */
-    private Align align = Align.ALIGN_LEFT;
-    /**
-     * 初始化计算
-     */
-    private boolean firstCalc = true;
+@SuppressLint("AppCompatCustomView")
+public class AlignTextView extends TextView {
+    private final static String TAG = AlignTextView.class.getSimpleName();
+    private final static char SPACE = ' '; //空格;
+    private static List<Character> punctuation = new ArrayList<Character>(); //标点符号
 
-    private float lineSpacingMultiplier = 1.0f;
-    private float lineSpacingAdd = 0.0f;
-
-    /**
-     * 原始高度
-     */
-    private int originalHeight = 0;
-    /**
-     * 原始行数
-     */
-    private int originalLineCount = 0;
-    /**
-     * 原始paddingBottom
-     */
-    private int originalPaddingBottom = 0;
-    private boolean setPaddingFromMe = false;
-
-    /**
-     * 尾行对齐方式
-     */
-    public enum Align {
-        /**
-         * 左对齐
-         */
-        ALIGN_LEFT,
-        /**
-         * 中对齐
-         */
-        ALIGN_CENTER,
-        /**
-         * 右对齐
-         */
-        ALIGN_RIGHT
+    //标点符号用于在textview右侧多出空间时，将空间加到标点符号的后面,以便于右端对齐
+    static {
+        punctuation.clear();
+        punctuation.add(',');
+        punctuation.add('.');
+        punctuation.add('?');
+        punctuation.add('!');
+        punctuation.add(';');
+        punctuation.add('，');
+        punctuation.add('。');
+        punctuation.add('？');
+        punctuation.add('！');
+        punctuation.add('；');
+        punctuation.add('）');
+        punctuation.add('】');
+        punctuation.add(')');
+        punctuation.add(']');
+        punctuation.add('}');
     }
+
+    private List<Integer> addCharPosition = new ArrayList<Integer>();  //增加空格的位置
+    private CharSequence oldText = ""; //旧文本，本来应该显示的文本
+    private CharSequence newText = ""; //新文本，真正显示的文本
+    private boolean inProcess = false; //旧文本是否已经处理为新文本
+    private boolean isAddPadding = false; //是否添加过边距
+    private boolean isConvert = false; //是否转换标点符号
 
     public AlignTextView(Context context) {
         super(context);
-        setTextIsSelectable(false);
     }
 
     public AlignTextView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        setTextIsSelectable(false);
 
-        int[] attributes = new int[]{android.R.attr.lineSpacingExtra, android.R.attr.lineSpacingMultiplier};
-        TypedArray arr = context.obtainStyledAttributes(attrs, attributes);
-        lineSpacingAdd = arr.getDimensionPixelSize(0, 0);
-        lineSpacingMultiplier = arr.getFloat(1, 1.0f);
-        originalPaddingBottom = getPaddingBottom();
-        arr.recycle();
-
-    }
-
-
-    @Override
-    protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
-        super.onLayout(changed, left, top, right, bottom);
-
-        //首先进行高度调整
-        if (firstCalc) {
-            width = getMeasuredWidth();
-            String text = getText().toString();
-            TextPaint paint = getPaint();
-            lines.clear();
-            tailLines.clear();
-
-            // 文本含有换行符时，分割单独处理
-            String[] items = text.split("\\n");
-            for (String item : items) {
-                calc(paint, item);
-            }
-
-            //使用替代textview计算原始高度与行数
-            measureTextViewHeight(text, paint.getTextSize(), getMeasuredWidth() -
-                    getPaddingLeft() - getPaddingRight());
-
-            //获取行高
-            textHeight = 1.0f * originalHeight / originalLineCount;
-
-            textLineSpaceExtra = textHeight * (lineSpacingMultiplier - 1) + lineSpacingAdd;
-
-            //计算实际高度,加上多出的行的高度(一般是减少)
-            int heightGap = (int) ((textLineSpaceExtra + textHeight) * (lines.size() -
-                    originalLineCount));
-
-            setPaddingFromMe = true;
-            //调整textview的paddingBottom来缩小底部空白
-            setPadding(getPaddingLeft(), getPaddingTop(), getPaddingRight(),
-                    originalPaddingBottom + heightGap);
-
-            firstCalc = false;
-        }
-    }
-
-    @Override
-    protected void onDraw(Canvas canvas) {
-        TextPaint paint = getPaint();
-        paint.setColor(getCurrentTextColor());
-        paint.drawableState = getDrawableState();
-
-        width = getMeasuredWidth();
-
-        Paint.FontMetrics fm = paint.getFontMetrics();
-        float firstHeight = getTextSize() - (fm.bottom - fm.descent + fm.ascent - fm.top);
-
-        // 是否垂直居中
-        if (getGravity() == Gravity.CENTER_VERTICAL) {
-            firstHeight = firstHeight + (textHeight - firstHeight) / 2;
-        }
-
-        int paddingTop = getPaddingTop();
-        int paddingLeft = getPaddingLeft();
-        int paddingRight = getPaddingRight();
-        width = width - paddingLeft - paddingRight;
-
-        for (int i = 0; i < lines.size(); i++) {
-            float drawY = i * textHeight + firstHeight;
-            String line = lines.get(i);
-            // 绘画起始x坐标
-            float drawSpacingX = paddingLeft;
-            float gap = (width - paint.measureText(line));
-            float interval = gap / (line.length() - 1);
-
-            // 绘制最后一行
-            if (tailLines.contains(i)) {
-                interval = 0;
-                if (align == Align.ALIGN_CENTER) {
-                    drawSpacingX += gap / 2;
-                } else if (align == Align.ALIGN_RIGHT) {
-                    drawSpacingX += gap;
-                }
-            }
-
-            for (int j = 0; j < line.length(); j++) {
-                float drawX = paint.measureText(line.substring(0, j)) + interval * j;
-                canvas.drawText(line.substring(j, j + 1), drawX + drawSpacingX, drawY +
-                        paddingTop + textLineSpaceExtra * i, paint);
-            }
+        //判断使用xml中是用android:text
+        TypedArray tsa = context.obtainStyledAttributes(attrs, new int[]{
+                android.R.attr.text
+        });
+        String text = tsa.getString(0);
+        tsa.recycle();
+        if (!TextUtils.isEmpty(text)) {
+            setText(text);
         }
     }
 
     /**
-     * 设置尾行对齐方式
+     * 监听文本复制，对于复制的文本进行空格剔除
      *
-     * @param align 对齐方式
+     * @param id 操作id(复制，全部选择等)
+     * @return 是否操作成功
      */
-    public void setAlign(Align align) {
-        this.align = align;
-        invalidate();
+    @Override
+    public boolean onTextContextMenuItem(int id) {
+        if (id == android.R.id.copy) {
+
+            if (isFocused()) {
+                final int selStart = getSelectionStart();
+                final int selEnd = getSelectionEnd();
+
+                int min = Math.max(0, Math.min(selStart, selEnd));
+                int max = Math.max(0, Math.max(selStart, selEnd));
+
+                //利用反射获取选择的文本信息，同时关闭操作框
+                try {
+                    Class cls = getClass().getSuperclass();
+                    Method getSelectTextMethod = cls.getDeclaredMethod("getTransformedText", int.class, int.class);
+                    getSelectTextMethod.setAccessible(true);
+                    CharSequence selectedText = (CharSequence) getSelectTextMethod.invoke(this,
+                            min, max);
+                    copy(selectedText.toString());
+
+                    Method closeMenuMethod;
+                    if (Build.VERSION.SDK_INT < 23) {
+                        closeMenuMethod = cls.getDeclaredMethod("stopSelectionActionMode");
+                    } else {
+                        closeMenuMethod = cls.getDeclaredMethod("stopTextActionMode");
+                    }
+                    closeMenuMethod.setAccessible(true);
+                    closeMenuMethod.invoke(this);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+            return true;
+        } else {
+            return super.onTextContextMenuItem(id);
+        }
+    }
+
+
+    /**
+     * 复制文本到剪切板，去除添加字符
+     *
+     * @param text 文本
+     */
+    private void copy(String text) {
+        ClipboardManager clipboard = (ClipboardManager) getContext().getSystemService(Context
+                .CLIPBOARD_SERVICE);
+        int start = newText.toString().indexOf(text);
+        int end = start + text.length();
+        StringBuilder sb = new StringBuilder(text);
+        for (int i = addCharPosition.size() - 1; i >= 0; i--) {
+            int position = addCharPosition.get(i);
+            if (position < end && position >= start) {
+                sb.deleteCharAt(position - start);
+            }
+        }
+        try {
+            android.content.ClipData clip = android.content.ClipData.newPlainText(null, sb.toString());
+            clipboard.setPrimaryClip(clip);
+        } catch (Exception e) {
+            Log.e(TAG, e.getMessage());
+        }
     }
 
     /**
-     * 计算每行应显示的文本数
-     *
-     * @param text 要计算的文本
+     * 重置状态
      */
-    private void calc(Paint paint, String text) {
-        if (text.length() == 0) {
-            lines.add("\n");
-            return;
-        }
-        // 起始位置
-        int startPosition = 0;
-        float oneChineseWidth = paint.measureText("中");
-        // 忽略计算的长度
-        int ignoreCalcLength = (int) (width / oneChineseWidth);
-        StringBuilder sb = new StringBuilder(text.substring(0, Math.min(ignoreCalcLength + 1,
-                text.length())));
-
-        for (int i = ignoreCalcLength + 1; i < text.length(); i++) {
-            if (paint.measureText(text.substring(startPosition, i + 1)) > width) {
-                startPosition = i;
-                //将之前的字符串加入列表中
-                lines.add(sb.toString());
-
-                sb = new StringBuilder();
-
-                //添加开始忽略的字符串，长度不足的话直接结束,否则继续
-                if ((text.length() - startPosition) > ignoreCalcLength) {
-                    sb.append(text.substring(startPosition, startPosition + ignoreCalcLength));
-                } else {
-                    lines.add(text.substring(startPosition));
-                    break;
-                }
-
-                i = i + ignoreCalcLength - 1;
-            } else {
-                sb.append(text.charAt(i));
-            }
-        }
-        if (sb.length() > 0) {
-            lines.add(sb.toString());
-        }
-
-        tailLines.add(lines.size() - 1);
+    public void reset() {
+        inProcess = false;
+        addCharPosition.clear();
+        newText = "";
     }
 
+    /**
+     * 处理多行文本
+     *
+     * @param paint 画笔
+     * @param text  文本
+     * @param width 最大可用宽度
+     * @return 处理后的文本
+     */
+    private String processText(Paint paint, String text, int width) {
+        if (text == null || text.length() == 0) {
+            return "";
+        }
+        String[] lines = text.split("\\n");
+        StringBuilder newText = new StringBuilder();
+        for (String line : lines) {
+            newText.append('\n');
+            newText.append(processLine(paint, line, width, newText.length() - 1));
+        }
+        if (newText.length() > 0) {
+            newText.deleteCharAt(0);
+        }
+        return newText.toString();
+    }
+
+
+    /**
+     * 处理单行文本
+     *
+     * @param paint                     画笔
+     * @param text                      文本
+     * @param width                     最大可用宽度
+     * @param addCharacterStartPosition 添加文本的起始位置
+     * @return 处理后的文本
+     */
+    private String processLine(Paint paint, String text, int width, int addCharacterStartPosition) {
+        if (text == null || text.length() == 0) {
+            return "";
+        }
+
+        StringBuilder old = new StringBuilder(text);
+        int startPosition = 0; // 起始位置
+
+        float chineseWidth = paint.measureText("中");
+        float spaceWidth = paint.measureText(SPACE + "");
+
+        //最大可容纳的汉字，每一次从此位置向后推进计算
+        int maxChineseCount = (int) (width / chineseWidth);
+
+        //减少一个汉字宽度，保证每一行前后都有一个空格
+        maxChineseCount--;
+
+        //如果不能容纳汉字，直接返回空串
+        if (maxChineseCount <= 0) {
+            return "";
+        }
+
+        for (int i = maxChineseCount; i < old.length(); i++) {
+            if (paint.measureText(old.substring(startPosition, i + 1)) > (width - spaceWidth)) {
+
+                //右侧多余空隙宽度
+                float gap = (width - spaceWidth - paint.measureText(old.substring(startPosition,
+                        i)));
+
+                List<Integer> positions = new ArrayList<Integer>();
+                for (int j = startPosition; j < i; j++) {
+                    char ch = old.charAt(j);
+                    if (punctuation.contains(ch)) {
+                        positions.add(j + 1);
+                    }
+                }
+
+                //空隙最多可以使用几个空格替换
+                int number = (int) (gap / spaceWidth);
+
+                //多增加的空格数量
+                int use = 0;
+
+                if (positions.size() > 0) {
+                    for (int k = 0; k < positions.size() && number > 0; k++) {
+                        int times = number / (positions.size() - k);
+                        int position = positions.get(k / positions.size());
+                        for (int m = 0; m < times; m++) {
+                            old.insert(position + m, SPACE);
+                            addCharPosition.add(position + m + addCharacterStartPosition);
+                            use++;
+                            number--;
+                        }
+                    }
+                }
+
+                //指针移动，将段尾添加空格进行分行处理
+                i = i + use;
+                old.insert(i, SPACE);
+                addCharPosition.add(i + addCharacterStartPosition);
+
+                startPosition = i + 1;
+                i = i + maxChineseCount;
+            }
+        }
+
+        return old.toString();
+    }
 
     @Override
     public void setText(CharSequence text, BufferType type) {
-        firstCalc = true;
-        super.setText(text, type);
+        //父类初始化的时候子类暂时没有初始化, 覆盖方法会被执行，屏蔽掉
+        if (addCharPosition == null) {
+            super.setText(text, type);
+            return;
+        }
+        if (!inProcess && (text != null && !text.equals(newText))) {
+            oldText = text;
+            process(false);
+            super.setText(newText, type);
+        } else {
+            //恢复初始状态
+            inProcess = false;
+            super.setText(text, type);
+        }
+    }
+
+    /**
+     * 获取真正的text
+     *
+     * @return 返回text
+     */
+    private CharSequence getRealText() {
+        return oldText;
     }
 
     @Override
-    public void setPadding(int left, int top, int right, int bottom) {
-        if (!setPaddingFromMe) {
-            originalPaddingBottom = bottom;
-        }
-        setPaddingFromMe = false;
-        super.setPadding(left, top, right, bottom);
+    public CharSequence getText() {
+        return getRealText();
     }
 
 
     /**
-     * 获取文本实际所占高度，辅助用于计算行高,行数
+     * 文本转化
      *
-     * @param text        文本
-     * @param textSize    字体大小
-     * @param deviceWidth 屏幕宽度
+     * @param setText 是否设置textView的文本
      */
-    private void measureTextViewHeight(String text, float textSize, int deviceWidth) {
-        TextView textView = new TextView(getContext());
-        textView.setText(text);
-        textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
-        int widthMeasureSpec = MeasureSpec.makeMeasureSpec(deviceWidth, MeasureSpec.EXACTLY);
-        int heightMeasureSpec = MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED);
-        textView.measure(widthMeasureSpec, heightMeasureSpec);
-        originalLineCount = textView.getLineCount();
-        originalHeight = textView.getMeasuredHeight();
+    private void process(boolean setText) {
+        if (oldText == null) {
+            oldText = "";
+        }
+        if (!inProcess && getVisibility() == VISIBLE) {
+            addCharPosition.clear();
+
+            //转化字符，5.0系统对字体处理有所变动
+            if (isConvert) {
+                oldText = replacePunctuation(oldText.toString());
+            }
+
+            if (getWidth() == 0) {
+                //没有测量完毕，等待测量完毕后处理
+                post(new Runnable() {
+                    @Override
+                    public void run() {
+                        process(true);
+                    }
+                });
+                return;
+            }
+
+            //添加过边距之后不再次添加
+            if (!isAddPadding) {
+                int spaceWidth = (int) (getPaint().measureText(SPACE + ""));
+                newText = processText(getPaint(), oldText.toString(), getWidth() - getPaddingLeft
+                        () -
+                        getPaddingRight() - spaceWidth);
+                setPadding(getPaddingLeft() + spaceWidth, getPaddingTop(), getPaddingRight(),
+                        getPaddingBottom());
+                isAddPadding = true;
+            } else {
+                newText = processText(getPaint(), oldText.toString(), getWidth() - getPaddingLeft
+                        () -
+                        getPaddingRight());
+            }
+            inProcess = true;
+            if (setText) {
+                setText(newText);
+            }
+        }
+    }
+
+    /**
+     * 是否转化标点符号，将中文标点转化为英文标点
+     *
+     * @param convert 是否转化
+     */
+    public void setPunctuationConvert(boolean convert) {
+        isConvert = convert;
+    }
+
+    private String replacePunctuation(String text) {
+        text = text.replace('，', ',').replace('。', '.').replace('【', '[').replace('】', ']')
+                .replace('？', '?').replace('！', '!').replace('（', '(').replace('）', ')').replace
+                        ('“', '"').replace('”', '"');
+        return text;
     }
 }

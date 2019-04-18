@@ -12,7 +12,7 @@ import com.memo.iframe.base.application.BaseApplication
  * @author zhou
  * @date 2019-01-29 17:09
  */
-fun Any.SP(name: String = BuildConfig.APPLICATION_ID) =
+fun Any.sp(name: String = BuildConfig.APPLICATION_ID): SharedPreferences =
     BaseApplication.app.getSharedPreferences(name, Context.MODE_PRIVATE)
 
 /**
@@ -36,6 +36,19 @@ fun SharedPreferences.put(key: String, value: Any) {
         }
     }
 }
+
+/**
+ * 移除key
+ */
+fun SharedPreferences.remove(key: String) {
+    edit {
+        remove(key)
+    }
+}
+
+
+
+
 
 fun SharedPreferences.clear() {
     edit { clear() }

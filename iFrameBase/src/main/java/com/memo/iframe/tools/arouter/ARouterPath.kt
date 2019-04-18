@@ -33,8 +33,8 @@ object ARouterPath {
     /**
      * 主页模块路径
      */
-    object Home {
-        const val HomeFragment:String = "/Home/HomeFragment"
+    object Article {
+        const val FavoriteActivity: String = "/Home/FavoriteActivity"
     }
 
     /**
@@ -51,5 +51,6 @@ object ARouterPath {
      * 我的模块路径
      */
     object Mine
+
 
 }

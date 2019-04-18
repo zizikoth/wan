@@ -3,7 +3,7 @@ ext {
             compileSdkVersion        : 28,
             minSdkVersion            : 19,
             targetSdkVersion         : 28,
-            versionCode              : 1000,
+            versionCode              : 100,
             versionName              : "1.0.0",
             applicationId            : "zhou.memo.wan",
             testInstrumentationRunner: "android.support.test.runner.AndroidJUnitRunner"
@@ -51,7 +51,7 @@ ext {
             glide             : "com.github.bumptech.glide:glide:$sdkVersion.glideVersion",
             imagepreview      : "com.ycjiang:ImagePreview:2.2.3",
             crash             : "com.github.zmemo:CrashHunter:1.0.2",
-            arouter           : "com.alibaba:arouter-api:1.4.1"
+            arouter           : "com.alibaba:arouter-api:1.4.1",
     ]
 
     widget = [
@@ -61,10 +61,12 @@ ext {
             banner            : "com.youth.banner:banner:1.4.10",
             smartrefreshlayout: "com.scwang.smartrefresh:SmartRefreshLayout:1.0.5.1",
             basepopup         : "com.github.razerdp:BasePopup:2.1.9",
-            supertextview     : "com.github.lygttpod:SuperTextView:2.2.0",
             tablayout         : "com.flyco.tablayout:FlycoTabLayout_Lib:2.1.2@aar",
+            magicindicaotr    : "com.github.hackware1993:MagicIndicator:1.6.0",
             agentweb          : "com.just.agentweb:agentweb:4.0.2",
-            rwidget           : "com.ruffian.library:RWidgetHelper:1.0.8"
+            rwidget           : "com.ruffian.library:RWidgetHelper:1.0.8",
+            flexbox           : "com.google.android:flexbox:1.0.0",
+            swiplayout        : "com.daimajia.swipelayout:library:1.2.0@aar"
     ]
 
     kapt = [

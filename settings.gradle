@@ -1,8 +1,6 @@
 include ':app',
         ':moduleLogin',
-        ':moduleHome',
         ':moduleMine',
-        ':moduleNavigation',
-        ':moduleProject',
+        ':moduleArticle',
         ':moduleCommon',
         ':iFrameBase'

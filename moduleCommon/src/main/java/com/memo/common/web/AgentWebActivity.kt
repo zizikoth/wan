@@ -1,8 +1,10 @@
 package com.memo.common.web
 
 import android.content.Intent
+import android.text.Html
 import android.view.ViewGroup
 import com.alibaba.android.arouter.facade.annotation.Route
+import com.blankj.utilcode.util.LogUtils
 import com.just.agentweb.AgentWeb
 import com.memo.common.R
 import com.memo.iframe.base.activity.BaseActivity
@@ -16,6 +18,7 @@ import kotlinx.android.synthetic.main.activity_argent_web.*
  * @author zhou
  * @date 2019-04-04 17:09
  */
+@Suppress("DEPRECATION")
 @Route(path = ARouterPath.Common.AgentWebActivity)
 class AgentWebActivity : BaseActivity() {
 
@@ -40,13 +43,14 @@ class AgentWebActivity : BaseActivity() {
     override fun initData(intent: Intent) {
         url = intent.getStringExtra("url")
         title = intent.getStringExtra("title")
+        LogUtils.iTag("AgentWeb", "url = $url \ntitle = $title")
     }
 
     /**
      * 初始化控件
      */
     override fun initView() {
-        setTitle(title)
+        setTitle(Html.fromHtml(title))
         mAgentWeb = AgentWeb.with(mActivity)
             .setAgentWebParent(mFlContainer, ViewGroup.LayoutParams(-1, -1))
             .useDefaultIndicator()

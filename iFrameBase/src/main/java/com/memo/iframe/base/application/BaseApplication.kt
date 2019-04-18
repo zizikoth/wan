@@ -69,6 +69,7 @@ open class BaseApplication : Application() {
         //配置AgentWeb
         initAgentWeb()
 
+
     }
 
     private fun initArouter() {

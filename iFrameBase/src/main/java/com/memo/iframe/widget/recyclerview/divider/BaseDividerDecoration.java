@@ -296,12 +296,12 @@ public abstract class BaseDividerDecoration extends RecyclerView.ItemDecoration 
     }
 
     /**
-     * Interface for controlling drawable-xhdpi object for divider drawing
+     * Interface for controlling drawable-xhdpi-xhdpi object for divider drawing
      */
     public interface DrawableProvider {
 
         /**
-         * Returns drawable-xhdpi instance for divider
+         * Returns drawable-xhdpi-xhdpi instance for divider
          *
          * @param position Divider position (or group index for GridLayoutManager)
          * @param parent   RecyclerView

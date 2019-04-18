@@ -3,7 +3,9 @@ package com.memo.wan.module.ui.splash
 import android.content.Intent
 import com.blankj.utilcode.util.BarUtils
 import com.memo.iframe.base.activity.BaseActivity
+import com.memo.iframe.config.constant.Constant
 import com.memo.iframe.tools.arouter.ARouterClient
+import com.memo.iframe.tools.ext.sp
 import com.memo.iframe.tools.handler.WeakHandler
 
 /**
@@ -15,7 +17,17 @@ import com.memo.iframe.tools.handler.WeakHandler
  */
 class SplashActivity : BaseActivity() {
 
-    private var mHandler: WeakHandler = WeakHandler()
+    private val WHAT_LOGIN = 1
+    private val WHAT_MAIN = 2
+
+    private var mHandler: WeakHandler = WeakHandler {
+        when (it.what) {
+            WHAT_LOGIN -> ARouterClient.startLogin()
+            WHAT_MAIN -> ARouterClient.startMain()
+        }
+        finish()
+        true
+    }
 
     override fun bindLayoutResId(): Int = -1
 
@@ -40,10 +52,13 @@ class SplashActivity : BaseActivity() {
      * 开始进行业务操作
      */
     override fun start() {
-        mHandler.postDelayed({
-            ARouterClient.startLogin()
-            finish()
-        }, 1000)
+        val cookie = sp().getString(Constant.SharedPreferences.COOKIE, "")
+        if (cookie.isNullOrEmpty()) {
+            mHandler.sendEmptyMessageDelayed(WHAT_LOGIN, 1000)
+        } else {
+            Constant.cookie = cookie
+            mHandler.sendEmptyMessageDelayed(WHAT_MAIN, 1000)
+        }
     }
 
     override fun onDestroy() {

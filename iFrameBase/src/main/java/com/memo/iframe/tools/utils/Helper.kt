@@ -1,7 +1,6 @@
 package com.memo.iframe.tools.utils
 
 import android.view.Gravity
-import com.blankj.utilcode.util.LogUtils
 import com.blankj.utilcode.util.ToastUtils
 import com.memo.iframe.R
 import kotlinx.android.synthetic.main.layout_toast.view.*
@@ -30,13 +29,4 @@ fun toastNormal(message: Any?) {
 
 fun cancelToast() {
     ToastUtils.cancel()
-}
-
-//------------------------------- Log相关 -------------------------------//
-fun log(vararg messages: Any?) {
-    LogUtils.i(messages)
-}
-
-fun logTag(tag: String, vararg messages: Any?) {
-    LogUtils.iTag(tag, messages)
 }

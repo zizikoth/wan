@@ -2,6 +2,7 @@ package com.memo.login.ui.activity.login
 
 import com.memo.iframe.base.mvp.IModel
 import com.memo.iframe.base.mvp.IView
+import com.memo.iframe.config.entity.EmptyResponse
 import com.memo.login.config.entity.UserInfo
 import io.reactivex.Observable
 
@@ -23,7 +24,7 @@ interface LoginContract {
         /**
          * 注册
          */
-        fun signUp(account: String, pwd: String, rePwd: String): Observable<Any>
+        fun signUp(account: String, pwd: String, rePwd: String): Observable<EmptyResponse>
     }
 
     interface View : IView {

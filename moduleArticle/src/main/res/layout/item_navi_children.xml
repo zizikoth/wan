@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.ruffian.library.widget.RTextView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/dp5"
+    android:paddingStart="@dimen/dp15"
+    android:paddingTop="@dimen/dp8"
+    android:paddingEnd="@dimen/dp15"
+    android:paddingBottom="@dimen/dp8"
+    android:textSize="@dimen/sp15"
+    app:background_normal="@color/color_F5F5F5"
+    app:background_pressed="@color/color_EEEEEE"
+    app:corner_radius="@dimen/dp15"
+    tools:text="搜索热词" />

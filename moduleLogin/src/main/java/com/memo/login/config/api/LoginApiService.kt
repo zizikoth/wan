@@ -2,6 +2,7 @@ package com.memo.login.config.api
 
 import com.memo.iframe.config.api.ApiClient
 import com.memo.iframe.config.entity.BaseResponse
+import com.memo.iframe.config.entity.EmptyResponse
 import com.memo.login.config.entity.UserInfo
 import io.reactivex.Observable
 import retrofit2.http.POST
@@ -15,7 +16,7 @@ import retrofit2.http.Query
  * @date 2019-04-12 17:02
  */
 
-val LoginApi: LoginApiService by lazy { ApiClient.create(LoginApiService::class.java) }
+val mLoginApi: LoginApiService by lazy { ApiClient.create(LoginApiService::class.java) }
 
 interface LoginApiService {
 
@@ -30,7 +31,7 @@ interface LoginApiService {
         @Query("username") account: String,
         @Query("password") pwd: String,
         @Query("repassword") rePwd: String
-    ): Observable<BaseResponse<Any>>
+    ): Observable<BaseResponse<EmptyResponse>>
 
     /**
      * 登陆

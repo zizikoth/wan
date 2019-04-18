@@ -39,4 +39,15 @@ object ARouterClient {
             .navigation()
     }
 
+
+    /**
+     * Article - 收藏界面
+     */
+    @JvmStatic
+    fun startFavorite() {
+        ARouter.getInstance().build(ARouterPath.Article.FavoriteActivity)
+            .navigation()
+    }
+
+
 }

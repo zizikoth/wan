@@ -1,39 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             xmlns:tools="http://schemas.android.com/tools"
-             android:layout_width="match_parent"
-             android:layout_height="@dimen/dp45"
-             tools:ignore="ContentDescription"
-             android:background="@color/white">
-
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    tools:targetApi="lollipop">
+    
     <ImageView
-            android:id="@+id/mIvBack"
-            android:layout_width="@dimen/dp45"
-            android:layout_height="@dimen/dp45"
-            android:background="?selectableItemBackground"
-            android:padding="@dimen/dp10"
-            android:src="@drawable/ic_back"/>
-
+        android:id="@+id/mIvBack"
+        android:layout_width="@dimen/dp50"
+        android:layout_height="@dimen/dp50"
+        android:background="?selectableItemBackgroundBorderless"
+        android:padding="@dimen/dp15"
+        android:src="@drawable/ic_back" />
+    
     <TextView
-            android:id="@+id/mTvTitle"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginStart="@dimen/dp45"
-            android:layout_marginEnd="@dimen/dp45"
-            android:ellipsize="end"
-            android:gravity="center"
-            android:maxLines="1"
-            android:textColor="@color/black"
-            android:textSize="@dimen/sp17"
-            android:textStyle="bold"
-            tools:text="标题"/>
-
+        android:id="@+id/mTvTitle"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp50"
+        android:layout_marginStart="@dimen/dp50"
+        android:layout_marginEnd="@dimen/dp50"
+        android:gravity="center"
+        android:ellipsize="marquee"
+        android:marqueeRepeatLimit="marquee_forever"
+        android:singleLine="true"
+        android:textColor="@color/black"
+        android:textSize="@dimen/sp18"
+        android:textStyle="bold"
+        tools:text="标题" />
+    
     <ImageView
-            android:id="@+id/mIvMore"
-            android:layout_width="@dimen/dp45"
-            android:layout_height="@dimen/dp45"
-            android:layout_gravity="end"
-            android:padding="@dimen/dp10"
-            tools:src="@drawable/ic_back"/>
+        android:id="@+id/mIvMore"
+        android:layout_width="@dimen/dp50"
+        android:layout_height="@dimen/dp50"
+        android:layout_gravity="end"
+        android:background="?selectableItemBackgroundBorderless"
+        android:padding="@dimen/dp15"
+        android:visibility="gone"
+        tools:src="@drawable/ic_launcher_background" />
+    
+    <View
+        android:id="@+id/mBottomLine"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_gravity="bottom"
+        android:background="#10000000"
+        android:visibility="gone" />
 
 </FrameLayout>

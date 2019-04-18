@@ -3,11 +3,15 @@ package com.memo.login.ui.activity.login
 import android.content.Intent
 import android.support.v4.app.Fragment
 import com.alibaba.android.arouter.facade.annotation.Route
+import com.blankj.utilcode.util.ActivityUtils
 import com.flyco.tablayout.listener.OnTabSelectListener
 import com.memo.iframe.base.activity.BaseMvpActivity
 import com.memo.iframe.base.adapter.BaseFragmentPagerAdapter
+import com.memo.iframe.config.constant.Constant
 import com.memo.iframe.tools.arouter.ARouterClient
 import com.memo.iframe.tools.arouter.ARouterPath
+import com.memo.iframe.tools.ext.edit
+import com.memo.iframe.tools.ext.sp
 import com.memo.login.R
 import com.memo.login.ui.fragment.signin.SignInFragment
 import com.memo.login.ui.fragment.signup.SignUpFragment
@@ -62,7 +66,13 @@ class LoginActivity : BaseMvpActivity<LoginContract.View, LoginPresenter>(), Log
     /**
      * 进行初始化数据
      */
-    override fun initData(intent: Intent) {}
+    override fun initData(intent: Intent) {
+        //清楚本地缓存的数据
+        sp().edit {
+            remove(Constant.SharedPreferences.COOKIE)
+            remove(Constant.SharedPreferences.USERNAME)
+        }
+    }
 
     /**
      * 进行初始化控件
@@ -92,7 +102,10 @@ class LoginActivity : BaseMvpActivity<LoginContract.View, LoginPresenter>(), Log
     /**
      * 开始进行业务操作
      */
-    override fun start() {}
+    override fun start() {
+        //除了最新的Activity关闭其他Activity
+        ActivityUtils.finishAllActivitiesExceptNewest()
+    }
 
     /**
      * 登陆
@@ -121,5 +134,17 @@ class LoginActivity : BaseMvpActivity<LoginContract.View, LoginPresenter>(), Log
      * 登陆流程失败了
      */
     override fun onFailure() {
+        if (mViewPager.currentItem == 0) {
+            mSignInFragment.finishSignIn()
+        } else {
+            mSignUpFragment.finishSignUP()
+        }
+    }
+
+    /**
+     * 点击返回键退出应用
+     */
+    override fun onBackPressed() {
+        ActivityUtils.finishAllActivities(true)
     }
 }

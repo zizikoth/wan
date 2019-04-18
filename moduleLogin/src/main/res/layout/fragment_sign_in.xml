@@ -29,8 +29,9 @@
             android:hint="Your Account"
             android:inputType="text"
             android:lines="1"
+            android:text="zhoumemo"
             android:textColor="@color/color_666666"
-            android:textSize="16sp"
+            android:textSize="@dimen/sp16"
             android:textStyle="bold" />
         
         <View
@@ -39,7 +40,8 @@
             android:layout_marginTop="@dimen/dp10"
             android:layout_marginBottom="@dimen/dp10"
             android:background="@color/white" />
-        
+    
+    
         <EditText
             android:id="@+id/mEtPwd"
             android:layout_width="match_parent"
@@ -49,26 +51,44 @@
             android:hint="Your Password"
             android:inputType="textPassword"
             android:lines="1"
+            android:text="12345678"
             android:textColor="@color/color_666666"
-            android:textSize="16sp"
+            android:textSize="@dimen/sp16"
             android:textStyle="bold" />
     
     
     </LinearLayout>
     
-    <com.ruffian.library.widget.RTextView
-        android:id="@+id/mTvSignIn"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp50"
+        android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/dp15"
         android:layout_marginTop="@dimen/dp25"
         android:layout_marginEnd="@dimen/dp15"
-        android:layout_marginBottom="@dimen/dp45"
-        android:gravity="center"
-        android:text="SIGN IN"
-        android:textColor="@color/white"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:background_normal="@color/color_main"
-        app:corner_radius="@dimen/dp25" />
+        android:layout_marginBottom="@dimen/dp45">
+        
+        <com.ruffian.library.widget.RTextView
+            android:id="@+id/mTvSignIn"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp50"
+            android:gravity="center"
+            android:text="SIGN IN"
+            android:textColor="@color/white"
+            android:textSize="@dimen/sp18"
+            android:textStyle="bold"
+            app:background_normal="@color/color_main"
+            app:corner_radius="@dimen/dp25" />
+        
+        <ProgressBar
+            android:id="@+id/mProgress"
+            android:layout_width="@dimen/dp100"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@color/color_main"
+            android:indeterminateTint="@color/white"
+            android:visibility="gone"
+            tools:targetApi="lollipop" />
+    
+    </FrameLayout>
+
 </LinearLayout>

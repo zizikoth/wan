@@ -94,7 +94,7 @@ abstract class BaseActivity : AppCompatActivity(), IView {
         super.onCreate(savedInstanceState)
         if (bindLayoutResId() != -1) {
             mRootView = inflaterView(R.layout.activity_base)
-            mRootView!!.mContentContainer.addView(inflaterView(bindLayoutResId()))
+            inflaterView(bindLayoutResId(), mRootView?.mContentContainer!!)
             setContentView(mRootView)
         }
         initBase()
@@ -120,8 +120,8 @@ abstract class BaseActivity : AppCompatActivity(), IView {
             StatusBarHelper.setColor(this, color(bindStatusBarColor()), 50)
         }
         mRootView?.mTitleView?.setVisibleOrGone(showTitleView())
-        mRootView?.mStatusView?.setVisibleOrGone(showStatusView())
-        mRootView?.mStatusView?.setOnRetryListener { start() }
+        mRootView?.mActivityStatusView?.setVisibleOrGone(showStatusView())
+        mRootView?.mActivityStatusView?.setOnRetryListener { start() }
     }
 
     /**
@@ -182,19 +182,19 @@ abstract class BaseActivity : AppCompatActivity(), IView {
     /**
      * 返回标题控件
      */
-    fun getTitleView(): TitleView? = mRootView?.mTitleView
+    fun getTitleView(): TitleView = mRootView!!.mTitleView
 
     /**
      * 返回状态控件
      */
-    fun getStatusView(): StatusView? = mRootView?.mStatusView
+    fun getStatusView(): StatusView = mRootView!!.mActivityStatusView
 
     /**
      * 显示加载框
      */
     override fun showLoading(tip: String) {
         if (showStatusView()) {
-            mRootView?.mStatusView?.showLoading(tip)
+            mRootView?.mActivityStatusView?.showLoading(tip)
         }
     }
 
@@ -203,7 +203,7 @@ abstract class BaseActivity : AppCompatActivity(), IView {
      */
     override fun showNetError() {
         if (showStatusView()) {
-            mRootView?.mStatusView?.showNetError()
+            mRootView?.mActivityStatusView?.showNetError()
         }
     }
 
@@ -212,7 +212,7 @@ abstract class BaseActivity : AppCompatActivity(), IView {
      */
     override fun showDataError() {
         if (showStatusView()) {
-            mRootView?.mStatusView?.showDataError()
+            mRootView?.mActivityStatusView?.showDataError()
         }
     }
 
@@ -221,7 +221,7 @@ abstract class BaseActivity : AppCompatActivity(), IView {
      */
     override fun showServerError() {
         if (showStatusView()) {
-            mRootView?.mStatusView?.showServerError()
+            mRootView?.mActivityStatusView?.showServerError()
         }
     }
 
@@ -230,7 +230,7 @@ abstract class BaseActivity : AppCompatActivity(), IView {
      */
     override fun hideAll() {
         if (showStatusView()) {
-            mRootView?.mStatusView?.hideAll()
+            mRootView?.mActivityStatusView?.hideAll()
         }
     }
 
