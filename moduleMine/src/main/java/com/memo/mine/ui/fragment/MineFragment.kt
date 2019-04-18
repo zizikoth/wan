@@ -13,7 +13,6 @@ import com.memo.mine.R
 import com.memo.mine.config.entity.MineData
 import com.memo.mine.ui.activity.about.AboutActivity
 import com.memo.mine.ui.activity.setting.SettingActivity
-import com.memo.mine.ui.activity.todo.TodoActivity
 import com.memo.mine.ui.adapter.MineAdapter
 import kotlinx.android.synthetic.main.fragment_mine.*
 
@@ -28,7 +27,6 @@ import kotlinx.android.synthetic.main.fragment_mine.*
 class MineFragment : BaseFragment() {
 
     private val Favorite: String = "我的收藏"
-    private val Todo: String = "待做清单"
     private val About: String = "关于我们"
 
     private val mAdapter: MineAdapter by lazy { MineAdapter() }
@@ -48,7 +46,6 @@ class MineFragment : BaseFragment() {
     override fun initData(bundle: Bundle?) {
         mData.apply {
             add(MineData(R.drawable.ic_mine_favorite, Favorite))
-            add(MineData(R.drawable.ic_mine_todo, Todo))
             add(MineData(R.drawable.ic_mine_about, About))
         }
     }
@@ -81,10 +78,6 @@ class MineFragment : BaseFragment() {
                 //我的收藏
                 Favorite -> {
                     ARouterClient.startFavorite()
-                }
-                // To Do
-                Todo -> {
-                    startActivity<TodoActivity>()
                 }
                 //关于我们
                 About -> {

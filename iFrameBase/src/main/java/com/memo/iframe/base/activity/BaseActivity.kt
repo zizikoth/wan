@@ -50,7 +50,7 @@ abstract class BaseActivity : AppCompatActivity(), IView {
     /**
      * 内容布局
      */
-    protected lateinit var mRootView: View
+    protected var mRootView: View? = null
 
     /**
      * 是否显示标题栏
@@ -94,7 +94,7 @@ abstract class BaseActivity : AppCompatActivity(), IView {
         super.onCreate(savedInstanceState)
         if (bindLayoutResId() != -1) {
             mRootView = inflaterView(R.layout.activity_base)
-            inflaterView(bindLayoutResId(), mRootView.mContentContainer!!)
+            inflaterView(bindLayoutResId(), mRootView?.mContentContainer!!)
             setContentView(mRootView)
         }
         initBase()
@@ -119,9 +119,9 @@ abstract class BaseActivity : AppCompatActivity(), IView {
         } else {
             StatusBarHelper.setColor(this, color(bindStatusBarColor()), 50)
         }
-        mRootView.mTitleView?.setVisibleOrGone(showTitleView())
-        mRootView.mActivityStatusView?.setVisibleOrGone(showStatusView())
-        mRootView.mActivityStatusView?.setOnRetryListener { start() }
+        mRootView?.mTitleView?.setVisibleOrGone(showTitleView())
+        mRootView?.mActivityStatusView?.setVisibleOrGone(showStatusView())
+        mRootView?.mActivityStatusView?.setOnRetryListener { start() }
     }
 
     /**
@@ -169,7 +169,7 @@ abstract class BaseActivity : AppCompatActivity(), IView {
      * 设置标题
      */
     override fun setTitle(title: CharSequence?) {
-        mRootView.mTitleView?.setTitle(title)
+        mRootView?.mTitleView?.setTitle(title)
     }
 
     /**
@@ -182,19 +182,19 @@ abstract class BaseActivity : AppCompatActivity(), IView {
     /**
      * 返回标题控件
      */
-    fun getTitleView(): TitleView = mRootView.mTitleView
+    fun getTitleView(): TitleView = mRootView!!.mTitleView
 
     /**
      * 返回状态控件
      */
-    fun getStatusView(): StatusView = mRootView.mActivityStatusView
+    fun getStatusView(): StatusView = mRootView!!.mActivityStatusView
 
     /**
      * 显示加载框
      */
     override fun showLoading(tip: String) {
         if (showStatusView()) {
-            mRootView.mActivityStatusView?.showLoading(tip)
+            mRootView?.mActivityStatusView?.showLoading(tip)
         }
     }
 
@@ -203,7 +203,7 @@ abstract class BaseActivity : AppCompatActivity(), IView {
      */
     override fun showNetError() {
         if (showStatusView()) {
-            mRootView.mActivityStatusView?.showNetError()
+            mRootView?.mActivityStatusView?.showNetError()
         }
     }
 
@@ -212,7 +212,7 @@ abstract class BaseActivity : AppCompatActivity(), IView {
      */
     override fun showDataError() {
         if (showStatusView()) {
-            mRootView.mActivityStatusView?.showDataError()
+            mRootView?.mActivityStatusView?.showDataError()
         }
     }
 
@@ -221,7 +221,7 @@ abstract class BaseActivity : AppCompatActivity(), IView {
      */
     override fun showServerError() {
         if (showStatusView()) {
-            mRootView.mActivityStatusView?.showServerError()
+            mRootView?.mActivityStatusView?.showServerError()
         }
     }
 
@@ -230,7 +230,7 @@ abstract class BaseActivity : AppCompatActivity(), IView {
      */
     override fun hideAll() {
         if (showStatusView()) {
-            mRootView.mActivityStatusView?.hideAll()
+            mRootView?.mActivityStatusView?.hideAll()
         }
     }
 

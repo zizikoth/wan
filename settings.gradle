@@ -1,4 +1,4 @@
-include ':app', ':moduleTodo',
+include ':app',
         ':moduleLogin',
         ':moduleMine',
         ':moduleArticle',
